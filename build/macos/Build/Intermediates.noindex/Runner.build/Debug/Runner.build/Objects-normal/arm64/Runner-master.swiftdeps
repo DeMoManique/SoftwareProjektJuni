@@ -1,0 +1,8 @@
+version: "Apple Swift version 5.8 (swiftlang-5.8.0.124.2 clang-1403.0.22.11.100)"
+options: "24b91ebeef89db418cf173b1c38d4542c867521fd5d33b1aed90815400864915"
+build_start_time: [1685603170, 152908000]
+build_end_time: [1685603171, 319118000]
+inputs:
+  "/Users/lucassjostrommacbook/calculator/macos/Flutter/GeneratedPluginRegistrant.swift": [1685603161, 75806349]
+  "/Users/lucassjostrommacbook/calculator/macos/Runner/AppDelegate.swift": [1684953162, 0]
+  "/Users/lucassjostrommacbook/calculator/macos/Runner/MainFlutterWindow.swift": [1684953162, 0]
