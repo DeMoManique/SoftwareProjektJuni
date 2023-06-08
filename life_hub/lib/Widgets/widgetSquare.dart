@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:life_hub/Widgets/widgetSetup.dart';
+
+
 
   @override
   Widget square(BuildContext context, String cardText){
@@ -7,8 +10,8 @@ import 'package:flutter/material.dart';
         borderRadius: BorderRadius.all(Radius.circular(20))
       ),
       child: SizedBox(
-        width: 210,
-        height: 210,
+        width: getWidth(context) * 0.47,
+        height: getWidth(context) * 0.47,
         child: Align(
           alignment: Alignment.topCenter,
           child: Padding(
