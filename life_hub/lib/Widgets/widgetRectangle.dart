@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:life_hub/Widgets/widgetSetup.dart';
 
 @override
-Widget square(BuildContext context, String cardText) {
+Widget Rectangle(BuildContext context, String cardText) {
   return Card(
     shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(20))),
