@@ -6,15 +6,15 @@ String location = '55.673185, 12.563980';
 String URL = 'https://api.weatherapi.com/v1/current.json?q=$location&key=$key';
 
 class weather {
-  String? location;
-  double? temperature;
-  double? temperatureFeel;
-  String? condition;
-  int? conditionCode;
-  double? windSpeed;
-  double? windDegree;
-  double? precip;
-  int? uv;
+  final String? location;
+  final double? temperature;
+  final double? temperatureFeel;
+  final String? condition;
+  final int? conditionCode;
+  final double? windSpeed;
+  final double? windDegree;
+  final double? precip;
+  final int? uv;
 
   const weather(
       {required this.location,
@@ -27,5 +27,16 @@ class weather {
       required this.precip,
       required this.uv});
 
-  factory weather.fromJson(Map<String, dynamic> json) {}
+  factory weather.fromJson(Map<String, dynamic> json) {
+    return weather(
+      location: json['location']['name'],
+      temperature: json['current']['temp_c'],
+      temperatureFeel: json['current']['feelslike_c'],
+      condition: json['current']['condition']['text'],
+      conditionCode: json['current']['condition']['code'],
+      windSpeed: json['current']['wind_kph'],
+      windDegree: json['current']['wind_degree'],
+      precip: json['current']['precip_mm'],
+      uv: json['current']['uv']);
+  }
 }
