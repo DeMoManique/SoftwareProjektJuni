@@ -9,7 +9,7 @@ Widget rejseplanWidget(BuildContext context) {
         borderRadius: BorderRadius.all(Radius.circular(20))),
     child: SizedBox(
       width: getWidth(context) * 0.97,
-      height: 210,
+      height: getWidth(context) * 0.47,
       child: Align(
           alignment: Alignment.topCenter,
           child:
