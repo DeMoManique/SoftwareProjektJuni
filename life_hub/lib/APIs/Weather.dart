@@ -16,15 +16,14 @@ Future<Weather> fetchWeather() async {
   }
 }
 
-main() async {
-  var weathernow = await fetchWeather();
-  // ignore: avoid_print
-  print(weathernow.location +
-      " " +
-      weathernow.temperature.toString() +
-      " C°, " +
-      weathernow.condition);
-}
+// main() async {
+//   var weathernow = await fetchWeather();
+//   print(weathernow.location +
+//       " " +
+//       weathernow.temperature.toString() +
+//       " C°, " +
+//       weathernow.condition);
+// }
 
 
 class Weather {
