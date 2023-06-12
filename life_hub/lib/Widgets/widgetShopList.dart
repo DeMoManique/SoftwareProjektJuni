@@ -5,5 +5,6 @@ import 'package:life_hub/Widgets/widgetShapes.dart';
 Widget ShopWidget(BuildContext context) {
   return Square(
     context,
+    color: Colors.yellow[700],
   );
 }

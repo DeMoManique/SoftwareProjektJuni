@@ -5,5 +5,6 @@ import 'package:life_hub/Widgets/widgetShapes.dart';
 Widget AdWidget(BuildContext context) {
   return Square(
     context,
+    color: Colors.red[600],
   );
 }

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:life_hub/Widgets/widgetAd.dart';
 import 'package:life_hub/Widgets/widgetSetup.dart';
 import 'package:life_hub/Widgets/widgetShapes.dart';
 import 'package:life_hub/Widgets/widgetRejseplan.dart';
+import 'package:life_hub/Widgets/widgetShopList.dart';
+import 'package:life_hub/Widgets/widgetTODO.dart';
 import 'package:life_hub/Widgets/widgetWeather.dart';
 
 void main() {
@@ -31,14 +34,7 @@ class MyApp extends StatelessWidget {
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        weatherWidget(context),
-                        Square(
-                          context,
-                          color: Colors.blue[100],
-                          function: test,
-                        )
-                      ],
+                      children: [weatherWidget(context), ShopWidget(context)],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -51,14 +47,11 @@ class MyApp extends StatelessWidget {
                           children: [
                             Square(context,
                                 color: Colors.green[300], function: test),
-                            Square(context, color: Colors.lime)
+                            AdWidget(context),
                           ],
                         ),
                         Column(
-                          children: [
-                            VertRectangle(context,
-                                color: Colors.red[300], function: test)
-                          ],
+                          children: [TODOWidget(context)],
                         ),
                       ],
                     ),
