@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:life_hub/Widgets/widgetCalender.dart';
 import 'package:life_hub/Widgets/widgetSetup.dart';
 import 'package:life_hub/Widgets/widgetShapes.dart';
 import 'package:life_hub/Widgets/widgetRejseplan.dart';
@@ -33,11 +34,7 @@ class MyApp extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         weatherWidget(context),
-                        Square(
-                          context,
-                          color: Colors.blue[100],
-                          function: test,
-                        )
+                        calenderWidget(context, ['hej', 'haahah', 'hej3', 'hej3', 'hej4', 'hej9'])
                       ],
                     ),
                     Row(
