@@ -9,6 +9,7 @@ Widget weatherWidget(BuildContext context) {
     context,
     color: Colors.amber[200],
     child: getWeather(),
+    function: weatherScreen,
   );
 }
 
@@ -46,12 +47,13 @@ getWeather() {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     //Temperature
                     Align(
                       alignment: Alignment.topLeft,
                       child: Padding(
-                        padding: EdgeInsets.all(6.0),
+                        padding: EdgeInsets.all(0),
                         child: Text(
                           '$temperature C°',
                           style: TextStyle(fontSize: 20),
@@ -97,3 +99,5 @@ getWeather() {
     },
   );
 }
+
+void weatherScreen() {}

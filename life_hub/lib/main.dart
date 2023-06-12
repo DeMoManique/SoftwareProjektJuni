@@ -36,6 +36,7 @@ class MyApp extends StatelessWidget {
                         Square(
                           context,
                           color: Colors.blue[100],
+                          function: test,
                         )
                       ],
                     ),
@@ -48,22 +49,15 @@ class MyApp extends StatelessWidget {
                       children: [
                         Column(
                           children: [
-                            Square(
-                              context,
-                              color: Colors.green[300],
-                            ),
-                            Square(
-                              context,
-                              color: Colors.lime,
-                            )
+                            Square(context,
+                                color: Colors.green[300], function: test),
+                            Square(context, color: Colors.lime, function: test)
                           ],
                         ),
                         Column(
                           children: [
-                            VertRectangle(
-                              context,
-                              color: Colors.red[300],
-                            )
+                            VertRectangle(context,
+                                color: Colors.red[300], function: test)
                           ],
                         ),
                       ],
@@ -71,6 +65,7 @@ class MyApp extends StatelessWidget {
                     BigSquare(
                       context,
                       color: Colors.pink[400],
+                      function: test,
                     )
                   ],
                 ),
@@ -79,4 +74,8 @@ class MyApp extends StatelessWidget {
           })),
     );
   }
+}
+
+void test() {
+  print('object');
 }

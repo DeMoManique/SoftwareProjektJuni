@@ -4,19 +4,28 @@ import 'package:life_hub/Widgets/widgetSetup.dart';
 class Shape extends Card {
   double? height;
   double? width;
+  Function function;
   Shape(BuildContext context,
-      {super.key, super.child, super.color, this.height, this.width});
+      {super.key,
+      super.child,
+      super.color,
+      this.height,
+      this.width,
+      required this.function});
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-        color: color,
-        shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(20))),
-        child: SizedBox(
-            width: getWidth(context) * width!,
-            height: getWidth(context) * height!,
-            child: Padding(padding: const EdgeInsets.all(10), child: child)));
+    return GestureDetector(
+      onTap: () => {function()},
+      child: Card(
+          color: color,
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(20))),
+          child: SizedBox(
+              width: getWidth(context) * width!,
+              height: getWidth(context) * height!,
+              child: Padding(padding: const EdgeInsets.all(10), child: child))),
+    );
   }
 }
 
@@ -26,7 +35,8 @@ class Square extends Shape {
       super.child,
       super.color,
       super.height = 0.47,
-      super.width = 0.47});
+      super.width = 0.47,
+      required super.function});
 }
 
 class HoriRectangle extends Shape {
@@ -35,7 +45,8 @@ class HoriRectangle extends Shape {
       super.child,
       super.color,
       super.height = 0.47,
-      super.width = 0.97});
+      super.width = 0.97,
+      required super.function});
 }
 
 class VertRectangle extends Shape {
@@ -44,7 +55,8 @@ class VertRectangle extends Shape {
       super.child,
       super.color,
       super.height = 0.97,
-      super.width = 0.47});
+      super.width = 0.47,
+      required super.function});
 }
 
 class BigSquare extends Square {
@@ -53,5 +65,6 @@ class BigSquare extends Square {
       super.child,
       super.color,
       super.height = 0.97,
-      super.width = 0.97});
+      super.width = 0.97,
+      required super.function});
 }
