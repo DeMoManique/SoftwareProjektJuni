@@ -4,6 +4,8 @@ import 'package:geolocator/geolocator.dart';
 
 Future<Weather> fetchWeather() async {
   String key = '486495597ff0499394a202301230606'; // API key
+  LocationPermission permission;
+permission = await Geolocator.requestPermission();
   Position position = await Geolocator.getCurrentPosition(
       desiredAccuracy: LocationAccuracy.high);
   String location = '${position.latitude},${position.longitude}'; // location
