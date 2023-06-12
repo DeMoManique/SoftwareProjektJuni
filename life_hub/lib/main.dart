@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:life_hub/Widgets/widgetSetup.dart';
 import 'package:life_hub/Widgets/widgetShapes.dart';
 import 'package:life_hub/Widgets/widgetRejseplan.dart';
 import 'package:life_hub/Widgets/widgetWeather.dart';
@@ -18,18 +19,49 @@ class MyApp extends StatelessWidget {
           backgroundColor: Colors.blueGrey,
           appBar: AppBar(
             backgroundColor: Colors.blue[200],
-            title: const Text("Hej Lucas"),
+            title: Text('Hej ${getName()}'),
           ),
           body: Column(
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [weatherWidget(context), weatherWidget(context)],
+                children: [
+                  weatherWidget(context),
+                  Square(
+                    context,
+                    color: Colors.blue[100],
+                  )
+                ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [rejseplanWidget(context)],
-              )
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Column(
+                    children: [
+                      Square(
+                        context,
+                        color: Colors.green[300],
+                      ),
+                      Square(
+                        context,
+                        color: Colors.lime,
+                      )
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      VertRectangle(
+                        context,
+                        color: Colors.red[300],
+                      )
+                    ],
+                  )
+                ],
+              ),
             ],
           )),
     );

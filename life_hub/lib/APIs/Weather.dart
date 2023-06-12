@@ -12,7 +12,6 @@ Future<Weather> fetchWeather() async {
   String URL =
       'https://api.weatherapi.com/v1/current.json?q=$location&key=$key';
   final response = await http.get(Uri.parse(URL));
-  print(response.statusCode);
   if (response.statusCode == 200) {
     return Weather.fromJson(jsonDecode(response.body));
   } else {
@@ -40,6 +39,7 @@ class Weather {
   final int windDegree;
   final double precip;
   final double uv;
+  final String imageURL;
 
   const Weather(
       {required this.location,
@@ -50,7 +50,8 @@ class Weather {
       required this.windSpeed,
       required this.windDegree,
       required this.precip,
-      required this.uv});
+      required this.uv,
+      required this.imageURL});
 
   factory Weather.fromJson(Map<String, dynamic> json) {
     return Weather(
@@ -62,6 +63,7 @@ class Weather {
         windSpeed: json['current']['wind_kph'],
         windDegree: json['current']['wind_degree'],
         precip: json['current']['precip_mm'],
-        uv: json['current']['uv']);
+        uv: json['current']['uv'],
+        imageURL: json['current']['condition']['icon']);
   }
 }

@@ -5,14 +5,11 @@ import 'package:life_hub/Widgets/widgetShapes.dart';
 
 @override
 Widget weatherWidget(BuildContext context) {
-  return Card(
-      shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(20))),
-      child: SizedBox(
-          width: getWidth(context) * 0.47,
-          height: getWidth(context) * 0.47,
-          child:
-              Padding(padding: const EdgeInsets.all(10), child: getWeather())));
+  return Square(
+    context,
+    color: Colors.amber[200],
+    child: getWeather(),
+  );
 }
 
 getWeather() {
@@ -31,7 +28,8 @@ getWeather() {
         String feelsLike = snapshot.data!.temperatureFeel.toString();
         String windSpeed = (snapshot.data!.windSpeed / 3.6).toStringAsFixed(2);
         String uv = snapshot.data!.uv.toString();
-        //-------
+        String imageURL = 'https:${snapshot.data!.imageURL}';
+        //---------------------------------------
         return Column(
           children: [
             Align(
@@ -77,8 +75,7 @@ getWeather() {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: Image(
-                          image: NetworkImage(
-                              'https://cdn.weatherapi.com/weather/64x64/day/116.png'),
+                          image: NetworkImage(imageURL),
                           height: 75,
                         ),
                       ),
