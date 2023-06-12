@@ -7,6 +7,8 @@ import 'package:life_hub/Widgets/widgetShopList.dart';
 import 'package:life_hub/Widgets/widgetTODO.dart';
 import 'package:life_hub/Widgets/widgetWeather.dart';
 
+import 'Widgets/widgetClock.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -45,8 +47,7 @@ class MyApp extends StatelessWidget {
                       children: [
                         Column(
                           children: [
-                            Square(context,
-                                color: Colors.green[300], function: test),
+                            clockWidget(context),
                             AdWidget(context),
                           ],
                         ),
