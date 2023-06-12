@@ -21,49 +21,62 @@ class MyApp extends StatelessWidget {
             backgroundColor: Colors.blue[200],
             title: Text('Hej ${getName()}'),
           ),
-          body: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  weatherWidget(context),
-                  Square(
-                    context,
-                    color: Colors.blue[100],
-                  )
-                ],
+          body: LayoutBuilder(builder:
+              (BuildContext context, BoxConstraints viewportConstraints) {
+            return SingleChildScrollView(
+              child: ConstrainedBox(
+                constraints:
+                    BoxConstraints(minHeight: viewportConstraints.maxHeight),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        weatherWidget(context),
+                        Square(
+                          context,
+                          color: Colors.blue[100],
+                        )
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [rejseplanWidget(context)],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Column(
+                          children: [
+                            Square(
+                              context,
+                              color: Colors.green[300],
+                            ),
+                            Square(
+                              context,
+                              color: Colors.lime,
+                            )
+                          ],
+                        ),
+                        Column(
+                          children: [
+                            VertRectangle(
+                              context,
+                              color: Colors.red[300],
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                    BigSquare(
+                      context,
+                      color: Colors.pink[400],
+                    )
+                  ],
+                ),
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [rejseplanWidget(context)],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Column(
-                    children: [
-                      Square(
-                        context,
-                        color: Colors.green[300],
-                      ),
-                      Square(
-                        context,
-                        color: Colors.lime,
-                      )
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      VertRectangle(
-                        context,
-                        color: Colors.red[300],
-                      )
-                    ],
-                  )
-                ],
-              ),
-            ],
-          )),
+            );
+          })),
     );
   }
 }
