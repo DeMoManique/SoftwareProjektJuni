@@ -36,7 +36,7 @@ class Square extends Shape {
       super.color,
       super.height = 0.47,
       super.width = 0.47,
-      required super.function});
+      super.function = nullMethod});
 }
 
 class HoriRectangle extends Shape {
@@ -46,7 +46,7 @@ class HoriRectangle extends Shape {
       super.color,
       super.height = 0.47,
       super.width = 0.97,
-      required super.function});
+      super.function = nullMethod});
 }
 
 class VertRectangle extends Shape {
@@ -56,7 +56,7 @@ class VertRectangle extends Shape {
       super.color,
       super.height = 0.97,
       super.width = 0.47,
-      required super.function});
+      super.function = nullMethod});
 }
 
 class BigSquare extends Square {
@@ -66,5 +66,9 @@ class BigSquare extends Square {
       super.color,
       super.height = 0.97,
       super.width = 0.97,
-      required super.function});
+      super.function = nullMethod});
+}
+
+void nullMethod() {
+  print('No Method Defined');
 }

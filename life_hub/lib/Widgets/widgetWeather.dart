@@ -31,63 +31,61 @@ getWeather() {
         String uv = snapshot.data!.uv.toString();
         String imageURL = 'https:${snapshot.data!.imageURL}';
         //---------------------------------------
-        return Column(
-          children: [
-            Align(
-              alignment: Alignment.topLeft,
-              child: Padding(
-                padding: const EdgeInsets.all(0),
-                child: Text(
-                  location,
-                  style: Theme.of(context).textTheme.headlineMedium,
+        return Container(
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: NetworkImage(imageURL), fit: BoxFit.contain)),
+          child: Column(
+            children: [
+              Align(
+                alignment: Alignment.topLeft,
+                child: Padding(
+                  padding: const EdgeInsets.all(0),
+                  child: Text(
+                    location,
+                    style: Theme.of(context).textTheme.headlineMedium,
+                  ),
                 ),
               ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    //Temperature
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: Padding(
-                        padding: EdgeInsets.all(0),
-                        child: Text(
-                          '$temperature C°',
-                          style: TextStyle(fontSize: 20),
-                        ),
-                      ),
-                    ),
-                    //Temperature feels like
-                    Align(
-                        alignment: Alignment.topLeft,
-                        child: Text('$feelsLike C°')),
-                    //Windspeed
-                    Align(
-                        alignment: Alignment.topLeft,
-                        child: Text('$windSpeed m/s')),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      //Temperature
                       Align(
-                        alignment: Alignment.centerLeft,
-                        child: Image(
-                          image: NetworkImage(imageURL),
-                          height: 75,
+                        alignment: Alignment.topLeft,
+                        child: Padding(
+                          padding: EdgeInsets.all(0),
+                          child: Text(
+                            '$temperature C°',
+                            style: TextStyle(fontSize: 20),
+                          ),
                         ),
                       ),
-                      Text('$uv UV'),
+                      //Temperature feels like
+                      Align(
+                          alignment: Alignment.topLeft,
+                          child: Text('$feelsLike C°')),
+                      //Windspeed
+                      Align(
+                          alignment: Alignment.topLeft,
+                          child: Text('$windSpeed m/s')),
                     ],
                   ),
-                )
-              ],
-            )
-          ],
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        Text('$uv UV'),
+                      ],
+                    ),
+                  )
+                ],
+              )
+            ],
+          ),
         );
       } else if (snapshot.hasError) {
         print('failure');

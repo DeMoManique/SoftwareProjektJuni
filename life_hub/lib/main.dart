@@ -51,7 +51,7 @@ class MyApp extends StatelessWidget {
                           children: [
                             Square(context,
                                 color: Colors.green[300], function: test),
-                            Square(context, color: Colors.lime, function: test)
+                            Square(context, color: Colors.lime)
                           ],
                         ),
                         Column(
@@ -65,7 +65,6 @@ class MyApp extends StatelessWidget {
                     BigSquare(
                       context,
                       color: Colors.pink[400],
-                      function: test,
                     )
                   ],
                 ),
