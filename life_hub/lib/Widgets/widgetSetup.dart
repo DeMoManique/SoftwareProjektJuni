@@ -14,16 +14,4 @@ List<String> getShoppingList() {
   return tempShop;
 }
 
-List<String> tempShop = [
-  'mel',
-  'æg',
-  'vanilje',
-  'pølser',
-  'gulerødder',
-  'Christopher',
-  'hvide drenge',
-  'brød',
-  'olie',
-  'mælk',
-  'en hel gris',
-];
+List<String> tempShop = [];
