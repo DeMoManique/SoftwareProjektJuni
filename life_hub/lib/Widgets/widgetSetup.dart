@@ -8,3 +8,10 @@ double getWidth(BuildContext context) {
 String getName() {
   return 'Lucas';
 }
+
+List<String> getShoppingList() {
+  //TODO få indkøbsliste fra database?
+  return tempShop;
+}
+
+List<String> tempShop = [];
