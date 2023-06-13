@@ -1,44 +1,68 @@
 import 'package:flutter/material.dart';
 import 'package:life_hub/Widgets/widgetSetup.dart';
 import 'package:life_hub/Widgets/widgetShapes.dart';
+import 'package:life_hub/main.dart';
 
-@override
-Widget ShopWidget(BuildContext context) {
-  return Square(
-    context,
-    color: Colors.yellow[700],
-    child: ListView(
-      children: StringListToTextList(getShoppingList()),
-    ),
-    function: () {
-      Navigator.pushNamed(context, '/ShoppingScreen');
-    },
-  );
+class ShopWidget extends StatefulWidget {
+  ShopWidget({super.key});
+  _ShopWidgetState _shopWidgetState = _ShopWidgetState();
+  @override
+  State<ShopWidget> createState() => _shopWidgetState;
 }
 
-List<Widget> StringListToTextList(List<String>? ShoppingList) {
-  List<Widget> result = [];
-  for (String element in ShoppingList!) {
-    result.add(Text(
-      '• $element',
-      style: TextStyle(fontSize: 24),
-    ));
+class _ShopWidgetState extends State<ShopWidget> {
+  refresh() {
+    setState(() {});
   }
-  return result;
+
+  @override
+  Widget build(BuildContext context) {
+    return Square(
+      context,
+      color: Colors.yellow[700],
+      child: ListView(
+        children: StringListToTextList(getShoppingList()),
+      ),
+      function: () {
+        Navigator.pushNamed(context, '/ShoppingScreen');
+      },
+    );
+  }
+
+  List<Widget> StringListToTextList(List<String>? ShoppingList) {
+    List<Widget> result = [];
+    for (String element in ShoppingList!) {
+      result.add(Text(
+        '• $element',
+        style: TextStyle(fontSize: 24),
+      ));
+    }
+    return result;
+  }
 }
 
 class ShoppingScreen extends StatefulWidget {
-  const ShoppingScreen({super.key});
+  final HomeScreen homeScreen;
+  const ShoppingScreen({required this.homeScreen, super.key});
 
   @override
-  State<ShoppingScreen> createState() => _ShoppingScreenState();
+  State<ShoppingScreen> createState() => _ShoppingScreenState(homeScreen);
 }
 
 class _ShoppingScreenState extends State<ShoppingScreen> {
+  final HomeScreen homeScreen;
+  _ShoppingScreenState(this.homeScreen);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () {
+            homeScreen.shopWidget._shopWidgetState.refresh();
+            Navigator.of(context).pop();
+          },
+        ),
         title: const Text('ShoppingList'),
       ),
       body: Center(
@@ -65,25 +89,25 @@ class _ShoppingScreenState extends State<ShoppingScreen> {
   refresh() {
     setState(() {});
   }
-}
 
-List<Widget> StringListToTextListForScreen(
-    List<String>? ShoppingList, BuildContext context, Function function) {
-  List<Widget> result = [];
-  for (String element in ShoppingList!) {
-    result.add(GestureDetector(
-      onTap: () {
-        ShoppingList.remove(element);
-        print(ShoppingList);
-        function();
-      },
-      child: Text(
-        '• $element',
-        style: TextStyle(fontSize: 24),
-      ),
-    ));
+  List<Widget> StringListToTextListForScreen(
+      List<String>? ShoppingList, BuildContext context, Function function) {
+    List<Widget> result = [];
+    for (String element in ShoppingList!) {
+      result.add(GestureDetector(
+        onTap: () {
+          ShoppingList.remove(element);
+          refresh();
+          function();
+        },
+        child: Text(
+          '• $element',
+          style: TextStyle(fontSize: 24),
+        ),
+      ));
+    }
+    return result;
   }
-  return result;
 }
 
 Widget _buildPopupDialog(BuildContext context, Function function) {
@@ -104,7 +128,6 @@ Widget _buildPopupDialog(BuildContext context, Function function) {
       ElevatedButton(
         onPressed: () {
           getShoppingList().add(controller.text);
-          print(controller.text);
           function();
           Navigator.of(context).pop();
         },

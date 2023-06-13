@@ -20,12 +20,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    HomeScreen homeScreen = HomeScreen();
     return MaterialApp(
       initialRoute: '/',
       routes: {
         //Add screens here
-        '/': (context) => const HomeScreen(),
-        '/ShoppingScreen': (context) => const ShoppingScreen(),
+        '/': (context) => homeScreen,
+        '/ShoppingScreen': (context) => ShoppingScreen(homeScreen: homeScreen),
       },
     );
   }
@@ -35,8 +36,17 @@ void test() {
   print('object');
 }
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class HomeScreen extends StatefulWidget {
+  HomeScreen({super.key});
+  final ShopWidget shopWidget = ShopWidget();
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState(shopWidget);
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  ShopWidget shopWidget;
+  _HomeScreenState(this.shopWidget);
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +66,7 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [weatherWidget(context), ShopWidget(context)],
+                    children: [weatherWidget(context), shopWidget],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -85,5 +95,9 @@ class HomeScreen extends StatelessWidget {
             ),
           );
         }));
+  }
+
+  refresh() {
+    setState(() {});
   }
 }
