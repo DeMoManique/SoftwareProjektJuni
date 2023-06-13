@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:life_hub/Widgets/widgetSetup.dart';
 import 'package:life_hub/Widgets/widgetShapes.dart';
 
 @override
@@ -9,6 +10,9 @@ Widget ShopWidget(BuildContext context) {
     child: ListView(
       children: StringListToTextList(getShoppingList()),
     ),
+    function: () {
+      Navigator.pushNamed(context, '/ShoppingScreen');
+    },
   );
 }
 
@@ -20,18 +24,22 @@ List<Widget> StringListToTextList(List<String>? ShoppingList) {
   return result;
 }
 
-List<String> getShoppingList() {
-  return [
-    'mel',
-    'æg',
-    'vanilje',
-    'pølser',
-    'gulerødder',
-    'Christopher',
-    'hvide drenge',
-    'brød',
-    'olie',
-    'mælk',
-    'en hel gris',
-  ];
+class ShoppingScreen extends StatelessWidget {
+  const ShoppingScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('ShoppingList'),
+      ),
+      body: Center(
+        child: ElevatedButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: const Text('Go Back!')),
+      ),
+    );
+  }
 }

@@ -21,55 +21,69 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-          backgroundColor: Colors.blueGrey,
-          appBar: AppBar(
-            backgroundColor: Colors.blue[200],
-            title: Text('Hej ${getName()}'),
-          ),
-          body: LayoutBuilder(builder:
-              (BuildContext context, BoxConstraints viewportConstraints) {
-            return SingleChildScrollView(
-              child: ConstrainedBox(
-                constraints:
-                    BoxConstraints(minHeight: viewportConstraints.maxHeight),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [weatherWidget(context), ShopWidget(context)],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [rejseplanWidget(context)],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Column(
-                          children: [
-                            clockWidget(context),
-                            AdWidget(context),
-                          ],
-                        ),
-                        Column(
-                          children: [TODOWidget(context)],
-                        ),
-                      ],
-                    ),
-                    BigSquare(
-                      context,
-                      color: Colors.pink[400],
-                    )
-                  ],
-                ),
-              ),
-            );
-          })),
+      initialRoute: '/',
+      routes: {
+        //Add screens here
+        '/': (context) => const HomeScreen(),
+        '/ShoppingScreen': (context) => const ShoppingScreen(),
+      },
     );
   }
 }
 
 void test() {
   print('object');
+}
+
+class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        backgroundColor: Colors.blueGrey,
+        appBar: AppBar(
+          backgroundColor: Colors.blue[200],
+          title: Text('Hej ${getName()}'),
+        ),
+        body: LayoutBuilder(builder:
+            (BuildContext context, BoxConstraints viewportConstraints) {
+          return SingleChildScrollView(
+            child: ConstrainedBox(
+              constraints:
+                  BoxConstraints(minHeight: viewportConstraints.maxHeight),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [weatherWidget(context), ShopWidget(context)],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [rejseplanWidget(context)],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Column(
+                        children: [
+                          clockWidget(context),
+                          AdWidget(context),
+                        ],
+                      ),
+                      Column(
+                        children: [TODOWidget(context)],
+                      ),
+                    ],
+                  ),
+                  BigSquare(
+                    context,
+                    color: Colors.pink[400],
+                  )
+                ],
+              ),
+            ),
+          );
+        }));
+  }
 }
