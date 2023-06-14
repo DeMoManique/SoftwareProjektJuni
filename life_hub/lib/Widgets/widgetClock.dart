@@ -11,6 +11,16 @@ Widget clockWidget(BuildContext context) {
       stream: Stream.periodic(const Duration(seconds: 1)),
       builder: ((context, snapshot) {
         now = DateTime.now();
+        String minute = now.minute.toString();
+        String second = now.second.toString();
+        if (second.length == 1) {
+          // make so it is 12.00 instead of 12.0
+          second = '0' + second;
+        }
+        if (minute.length == 1) {
+          // make so it is 12.00 instead of 12.0
+          minute = '0' + minute;
+        }
         return Square(
           context,
           color: Color.fromARGB(255, 169, 216, 235),
@@ -19,21 +29,24 @@ Widget clockWidget(BuildContext context) {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    '${now.hour}:${now.minute}',
+                    '${now.hour}:${minute}',
                     style: TextStyle(
-                      fontSize: 70,
+                      fontFamily: 'MoiraiOne',
+                      fontSize: 55,
                       fontWeight: FontWeight.bold,
                       color: Color.fromARGB(255, 0, 0, 0),
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(0,35,0,0),
+                    padding: const EdgeInsets.fromLTRB(0,0,0,50),
                     child: Text(
-                      '${now.second}',
+                      '${second}',
                       style: TextStyle(
-                        fontSize: 20,
+                        fontFamily: 'MoiraiOne',
+                        fontSize: 15,
                         fontWeight: FontWeight.bold,
                         color: Color.fromARGB(255, 0, 0, 0),
                       ),
@@ -43,7 +56,9 @@ Widget clockWidget(BuildContext context) {
               ),
             ],
           ),
+          
         );
+        
       }));
 }
 

@@ -5,6 +5,11 @@ double getWidth(BuildContext context) {
   return width;
 }
 
+double getHeight(BuildContext context) {
+  double height = MediaQuery.of(context).size.height;
+  return height;
+}
+
 String getName() {
   return 'Lucas';
 }

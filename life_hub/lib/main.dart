@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:life_hub/Widgets/widgetAnalogClock.dart';
 import 'package:life_hub/Widgets/widgetCalender.dart';
 import 'package:life_hub/Widgets/widgetAd.dart';
 import 'package:life_hub/Widgets/widgetSetup.dart';
@@ -32,9 +33,7 @@ class MyApp extends StatelessWidget {
       },
     );
   }
-
 }
-
 
 void test() {
   print('object');
@@ -88,6 +87,13 @@ class _HomeScreenState extends State<HomeScreen> {
                       Column(
                         children: [TODOWidget(context)],
                       ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      analogClockWidget(context),
+                      Square(context),
                     ],
                   ),
                   BigSquare(
