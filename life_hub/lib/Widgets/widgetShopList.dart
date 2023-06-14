@@ -2,46 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:life_hub/Widgets/widgetSetup.dart';
 import 'package:life_hub/Widgets/widgetShapes.dart';
 
-Widget _buildPopupDialog(
-    BuildContext context, Function function, Function list) {
-  final TextEditingController controller = TextEditingController();
-  return AlertDialog(
-    title: const Text('Add element to shopping list'),
-    content: Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        TextField(
-          controller: controller,
-        )
-      ],
-    ),
-    actions: <Widget>[
-      ElevatedButton(
-        onPressed: () {
-          list().add(controller.text);
-          function();
-          Navigator.of(context).pop();
-        },
-        child: const Text('add'),
-      ),
-      ElevatedButton(
-        onPressed: () {
-          function();
-          Navigator.of(context).pop();
-        },
-        child: const Text('Close'),
-      ),
-    ],
-  );
-}
-
 class ListWidget extends StatefulWidget {
   final Function list;
   final String screenName;
   final _ListWidgetState _listWidgetState;
-  ListWidget({super.key, required this.screenName, required this.list})
-      : _listWidgetState = _ListWidgetState(list: list, screenName: screenName);
+  final Color color;
+  ListWidget(
+      {super.key,
+      required this.screenName,
+      required this.list,
+      required this.color})
+      : _listWidgetState =
+            _ListWidgetState(list: list, screenName: screenName, color: color);
 
   @override
   State<ListWidget> createState() => _listWidgetState;
@@ -50,8 +22,10 @@ class ListWidget extends StatefulWidget {
 class _ListWidgetState extends State<ListWidget> {
   final Function list;
   final String screenName;
+  final Color color;
 
-  _ListWidgetState({required this.list, required this.screenName});
+  _ListWidgetState(
+      {required this.list, required this.screenName, required this.color});
   refresh() {
     setState(() {});
   }
@@ -60,7 +34,7 @@ class _ListWidgetState extends State<ListWidget> {
   Widget build(BuildContext context) {
     return Square(
       context,
-      color: Colors.yellow[700],
+      color: color,
       child: ListView(
         children: StringListToTextList(list()),
       ),
@@ -159,16 +133,54 @@ class _ListWidgetScreenState extends State<ListWidgetScreen> {
   }
 }
 
+Widget _buildPopupDialog(
+    BuildContext context, Function function, Function list) {
+  final TextEditingController controller = TextEditingController();
+  return AlertDialog(
+    title: const Text('Add element to shopping list'),
+    content: Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        TextField(
+          controller: controller,
+        )
+      ],
+    ),
+    actions: <Widget>[
+      ElevatedButton(
+        onPressed: () {
+          list().add(controller.text);
+          function();
+          Navigator.of(context).pop();
+        },
+        child: const Text('add'),
+      ),
+      ElevatedButton(
+        onPressed: () {
+          function();
+          Navigator.of(context).pop();
+        },
+        child: const Text('Close'),
+      ),
+    ],
+  );
+}
+
 class ShoppingWidget extends ListWidget {
   ShoppingWidget(
       {super.key,
       super.screenName = '/ShoppingScreen',
-      super.list = getShoppingList});
+      super.list = getShoppingList,
+      required super.color});
 }
 
 class TODOWidget extends ListWidget {
   TODOWidget(
-      {super.key, super.screenName = '/TODOScreen', super.list = getTODOList});
+      {super.key,
+      super.screenName = '/TODOScreen',
+      super.list = getTODOList,
+      required super.color});
 }
 
 class ShoppingListScreen extends ListWidgetScreen {

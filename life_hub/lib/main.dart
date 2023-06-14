@@ -22,10 +22,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    ShoppingWidget shoppingWidget = ShoppingWidget();
+    ShoppingWidget shoppingWidget = ShoppingWidget(
+      color: Colors.red,
+    );
     ShoppingListScreen shopScreen =
         ShoppingListScreen(parentWidget: shoppingWidget);
-    TODOWidget todoWidget = TODOWidget();
+    TODOWidget todoWidget = TODOWidget(color: Colors.blue);
     TodoListScreen todoScreen = TodoListScreen(parentWidget: todoWidget);
 
     HomeScreen homeScreen = HomeScreen(
