@@ -23,7 +23,7 @@ Widget analogClockWidget(BuildContext context) {
           minute = '0' + minute;
         }
         return Container(
-          height: getHeight(context) * 0.47,
+          height: getWidth(context) * 0.47,
           width: getWidth(context) * 0.47,
           decoration: const BoxDecoration(
             shape: BoxShape.circle,
