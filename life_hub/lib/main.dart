@@ -93,7 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       analogClockWidget(context),
-                      Square(context),
+                      calenderWidget(context),
                     ],
                   ),
                   BigSquare(
