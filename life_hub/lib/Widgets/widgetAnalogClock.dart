@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:life_hub/Widgets/AnalogClockArm.dart';
-import 'package:life_hub/Widgets/widgetShapes.dart';
 import 'package:life_hub/Widgets/widgetSetup.dart';
 
 //Klokken lige nu
@@ -19,14 +18,13 @@ Widget analogClockWidget(BuildContext context) {
         now = DateTime.now();
         String minute = now.minute.toString();
         String second = now.second.toString();
-        double hourlength = getWidth(context) * 0.06;
         if (second.length == 1) {
           // make so it is 12.00 instead of 12.0
-          second = '0' + second;
+          second = '0$second';
         }
         if (minute.length == 1) {
           // make so it is 12.00 instead of 12.0
-          minute = '0' + minute;
+          minute = '0$minute';
         }
         return Container(
           height: getWidth(context) * 0.47,
@@ -38,7 +36,7 @@ Widget analogClockWidget(BuildContext context) {
           child: Padding(
               padding: EdgeInsets.all(4),
               child: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     color: Color.fromARGB(255, 240, 251, 255)),
                 child: Stack(
@@ -57,7 +55,7 @@ Widget analogClockWidget(BuildContext context) {
                       child: Container(
                         height: getWidth(context) * 0.015,
                         width: getWidth(context) * 0.015,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                             shape: BoxShape.circle,
                             color: Color.fromARGB(255, 0, 0, 0)),
                       ),
