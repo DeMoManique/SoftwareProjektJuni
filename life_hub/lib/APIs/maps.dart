@@ -19,19 +19,19 @@ Future<Route> fetchRoutes() async {
 
 }
 
-main() async{
-  var din = await fetchRoutes();
-  print(din.origin + " <---> " + din.destination + ", " + din.travelTime );
+// main() async{
+//   var din = await fetchRoutes();
+//   print(din.origin + " <---> " + din.destination + ", " + din.travelTime );
   
-  for(final liner in din.lines){
-    if(liner['transit_details'] == null){
-      print(liner['travel_mode']);
-    } else {
-      print(liner['transit_details']['line']['vehicle']['name']);
-      print( liner['transit_details']['line']['short_name']);
-    }
-  }
-}
+//   for(final liner in din.lines){
+//     if(liner['transit_details'] == null){
+//       print(liner['travel_mode']);
+//     } else {
+//       print(liner['transit_details']['line']['vehicle']['name']);
+//       print( liner['transit_details']['line']['short_name']);
+//     }
+//   }
+// }
 
 class Route {
   final String origin;

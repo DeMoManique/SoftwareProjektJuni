@@ -33,7 +33,7 @@ getRoutes() {
               top: 9,
               left: 9,
               child: Text(
-                "{$snapshot.data!.origin.split(',')[0]}",
+                snapshot.data!.origin.split(",")[0],
                 textAlign: TextAlign.left,
                 style: TextStyle(
                     overflow: TextOverflow.ellipsis, fontSize: 20, height: 1),
@@ -42,7 +42,7 @@ getRoutes() {
               top: 39,
               left: 9,
               child: Text(
-                'Taastrup',
+                snapshot.data!.origin.split(",")[2],
                 textAlign: TextAlign.left,
                 style: TextStyle(fontSize: 12, height: 1),
               )),
@@ -50,7 +50,7 @@ getRoutes() {
               top: 9,
               right: 9,
               child: Text(
-                'Bygning 324',
+                snapshot.data!.destination.split(",")[0],
                 textAlign: TextAlign.right,
                 style: TextStyle(
                     overflow: TextOverflow.ellipsis, fontSize: 20, height: 1),
@@ -59,7 +59,7 @@ getRoutes() {
               top: 39,
               right: 9,
               child: Text(
-                'Lyngby',
+                snapshot.data!.destination.split(",")[1],
                 textAlign: TextAlign.right,
                 style: TextStyle(fontSize: 12, height: 1),
               )),
@@ -68,7 +68,7 @@ getRoutes() {
               top: 87,
               left: 12,
               child: Text(
-                '99:99',
+                snapshot.data!.departureTime, 
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 20, height: 1),
               )),
@@ -94,11 +94,7 @@ getRoutes() {
           //     left: 0,
           //     right: 0,
           //     // insert picture here schedule.png
-          //     child: BoxDecoration(
-          //     image: DecorationImage(
-          //         image: AssetImage('assets/images/schedulepng.png'),
-          // )),
-
+          //     child: AssetImage('assets/images/schedulepng.png'),
           //     )
         ]);
 
