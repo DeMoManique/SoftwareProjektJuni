@@ -69,6 +69,29 @@ class BigSquare extends Square {
       super.function = nullMethod});
 }
 
+class Circle extends StatelessWidget {
+  final String text;
+  const Circle({super.key, required this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        height: 200,
+        width: 200,
+        decoration: const BoxDecoration(
+            shape: BoxShape.circle, color: Color.fromARGB(255, 12, 157, 17)),
+        child: Center(
+            child: Text(
+          text,
+          style: const TextStyle(fontSize: 50, color: Colors.white),
+        )),
+      ),
+    );
+  }
+}
+
 void nullMethod() {
   print('No Method Defined');
 }

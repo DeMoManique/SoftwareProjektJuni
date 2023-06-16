@@ -2,7 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:flutter/material.dart';
 import 'package:life_hub/Widgets/widgetComponents.dart';
+import 'package:life_hub/Widgets/widgetList.dart';
 import 'package:life_hub/main.dart';
+
+import 'package:life_hub/Widgets/widgetWeather.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -94,8 +97,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
         await user.updateDisplayName(_userNameTextController.text.trim());
 
         print("Created New Account");
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const HomeScreen()));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => HomeScreen(
+                      shoppingWidget: ShoppingWidget(color: Colors.red),
+                      todoWidget: TODOWidget(color: Colors.blue),
+                      weatherScreen: WeatherScreen(),
+                    )));
       }
     } catch (e) {
       if (e is FirebaseAuthException) {
@@ -109,34 +118,4 @@ class _SignUpScreenState extends State<SignUpScreen> {
       }
     }
   }
-
-/*
-  void signUp() async {
-    try {
-      await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(
-              email: _emailTextController.text.trim(),
-              password: _passwordTextController.text.trim())
-          .then((value) {
-        print("Created New Account");
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const HomeScreen()));
-      }).onError((error, stackTrace) {
-        print("Error ${error.toString()}");
-      });
-    } catch (e) {
-      if (e is FirebaseAuthException) {
-        if (e.code == 'invalid-email') {
-          // Handle the specific error with invalid email format
-          print('Invalid email format');
-        } else {
-          // Handle other FirebaseAuthExceptions
-          print('Authentication error: ${e.code}');
-        }
-      } else {
-        // Handle other types of exceptions
-        print('Error: $e');
-      }
-    }
-  }*/
 }

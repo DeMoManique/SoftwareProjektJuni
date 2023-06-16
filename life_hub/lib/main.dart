@@ -1,5 +1,7 @@
 import 'dart:async';
-
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:life_hub/Pages/signinScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:life_hub/Widgets/widgetAnalogClock.dart';
 import 'package:life_hub/Widgets/widgetCalender.dart';
@@ -9,10 +11,12 @@ import 'package:life_hub/Widgets/widgetShapes.dart';
 import 'package:life_hub/Widgets/widgetRejseplan.dart';
 import 'package:life_hub/Widgets/widgetList.dart';
 import 'package:life_hub/Widgets/widgetWeather.dart';
-
+import 'package:life_hub/Widgets/widgetRun.dart';
 import 'Widgets/widgetClock.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -38,13 +42,23 @@ class MyApp extends StatelessWidget {
     );
 
     return MaterialApp(
-      initialRoute: '/',
+      debugShowCheckedModeBanner: false,
+      home: StreamBuilder<User?>(
+          stream: FirebaseAuth.instance.authStateChanges(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return homeScreen;
+            } else {
+              return const SignInScreen();
+            }
+          }),
       routes: {
         //Add screens here
-        '/': (context) => homeScreen,
+        '/homeScreen': (context) => homeScreen,
         '/ShoppingScreen': (context) => shopScreen,
         '/TODOScreen': (context) => todoScreen,
         '/WeatherScreen': (context) => weatherScreen,
+        '/speedPage': (context) => const SpeedPage(),
       },
     );
   }
@@ -78,10 +92,18 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.blueGrey,
+        backgroundColor: Color.fromRGBO(67, 176, 176, 1),
         appBar: AppBar(
-          backgroundColor: Colors.blue[200],
-          title: Text('Hej ${getName()}'),
+          automaticallyImplyLeading: false,
+          backgroundColor: Color.fromRGBO(48, 125, 125, 1),
+          title: Text('Hej ${FirebaseAuth.instance.currentUser?.displayName}'),
+          actions: [
+            GestureDetector(
+                onTap: () {
+                  FirebaseAuth.instance.signOut();
+                },
+                child: Icon(Icons.logout))
+          ],
         ),
         body: LayoutBuilder(builder:
             (BuildContext context, BoxConstraints viewportConstraints) {
@@ -126,7 +148,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   BigSquare(
                     context,
                     color: Colors.pink[400],
-                  )
+                  ),
+                  Column(children: [
+                    widgetRun(context),
+                  ]),
                 ],
               ),
             ),

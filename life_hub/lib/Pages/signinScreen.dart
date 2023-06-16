@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:life_hub/Pages/resetPasswordScreen.dart';
 import 'package:life_hub/Pages/signupScreen.dart';
 import 'package:life_hub/Widgets/widgetComponents.dart';
+import 'package:life_hub/Widgets/widgetList.dart';
+import 'package:life_hub/Widgets/widgetWeather.dart';
 import 'package:life_hub/main.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -62,7 +64,12 @@ class _SignInScreenState extends State<SignInScreen> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const HomeScreen()));
+                          builder: (context) => HomeScreen(
+                                shoppingWidget:
+                                    ShoppingWidget(color: Colors.red),
+                                todoWidget: TODOWidget(color: Colors.blue),
+                                weatherScreen: WeatherScreen(),
+                              )));
                 }).onError((error, stackTrace) {
                   print("Error ${error.toString()}");
                 });
