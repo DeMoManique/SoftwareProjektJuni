@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "645710973649",
-    "project_id": "lifehub-e524e",
-    "storage_bucket": "lifehub-e524e.appspot.com"
+    "project_number": "241690995553",
+    "project_id": "lifeserver-ea648",
+    "storage_bucket": "lifeserver-ea648.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:645710973649:android:4de1645e325959e06153f0",
+        "mobilesdk_app_id": "1:241690995553:android:add4eec30e892f99017320",
         "android_client_info": {
           "package_name": "com.example.life_hub"
         }
       },
       "oauth_client": [
         {
-          "client_id": "645710973649-2jmef7o91jg4bkn2tlb61ctjkmhl411d.apps.googleusercontent.com",
+          "client_id": "241690995553-8tfn57q2i31l2hnv2k2dl9sqb2nieeb9.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyD7QRT8iHhRMHXxuwgkAQM2eeq6PL-0LAQ"
+          "current_key": "AIzaSyDxZJBmrNeExbursDTIjPbP-2bA5RSo22E"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "645710973649-2jmef7o91jg4bkn2tlb61ctjkmhl411d.apps.googleusercontent.com",
+              "client_id": "241690995553-8tfn57q2i31l2hnv2k2dl9sqb2nieeb9.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
