@@ -81,7 +81,7 @@ class Circle extends StatelessWidget {
         height: 200,
         width: 200,
         decoration: const BoxDecoration(
-            shape: BoxShape.circle, color: Color.fromARGB(255, 12, 157, 17)),
+            shape: BoxShape.circle, color: Color.fromRGBO(36, 94, 94, 1.0)),
         child: Center(
             child: Text(
           text,

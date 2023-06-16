@@ -102,6 +102,16 @@ class _SpeedPage extends State<SpeedPage> {
   @override
   build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromRGBO(67, 176, 176, 1),
+      appBar: AppBar(forceMaterialTransparency: true, actions: [
+        Padding(
+          padding: const EdgeInsets.fromLTRB(0, 0, 15, 0),
+          child: GestureDetector(
+            onTap: () {},
+            child: Icon(Icons.leaderboard),
+          ),
+        )
+      ]),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -142,28 +152,6 @@ class _SpeedPage extends State<SpeedPage> {
             ),
         ],
       ),
-      backgroundColor: Colors.white,
     );
-    /*
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Location"),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'Speed:',
-              style: TextStyle(fontSize: 24.0),
-            ),
-            Text(
-              '$_speedKph km/h',
-              style: TextStyle(fontSize: 48.0),
-            ),
-          ],
-        ),
-      ),
-    );*/
   }
 }
