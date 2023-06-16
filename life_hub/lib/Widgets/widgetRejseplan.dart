@@ -25,14 +25,87 @@ getRoutes() {
     future: futureRoute,
     builder: (context, snapshot) {
       if (snapshot.hasData) {
-        return Column(
-          children: [
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-              Text(snapshot.data!.origin.split(",")[0]),
-              Text(snapshot.data!.destination.split(",")[0])
-            ]),
-          ],
-        );
+        return Stack(children: [
+        
+
+          // Origin
+          Positioned(
+              top: 9,
+              left: 9,
+              child: Text(
+                "{$snapshot.data!.origin.split(',')[0]}",
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                    overflow: TextOverflow.ellipsis, fontSize: 20, height: 1),
+              )),
+          Positioned(
+              top: 39,
+              left: 9,
+              child: Text(
+                'Taastrup',
+                textAlign: TextAlign.left,
+                style: TextStyle(fontSize: 12, height: 1),
+              )),
+          Positioned(
+              top: 9,
+              right: 9,
+              child: Text(
+                'Bygning 324',
+                textAlign: TextAlign.right,
+                style: TextStyle(
+                    overflow: TextOverflow.ellipsis, fontSize: 20, height: 1),
+              )),
+          Positioned(
+              top: 39,
+              right: 9,
+              child: Text(
+                'Lyngby',
+                textAlign: TextAlign.right,
+                style: TextStyle(fontSize: 12, height: 1),
+              )),
+
+          Positioned(
+              top: 87,
+              left: 12,
+              child: Text(
+                '99:99',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 20, height: 1),
+              )),
+          Positioned(
+              top: 86,
+              right: 12,
+              child: Text(
+                '8:20',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 20, height: 1),
+              )),
+          Positioned(
+              top: 50,
+              left: 0,
+              right: 0,
+              child: Text(
+                '1 t 10 min',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 20, height: 1),
+              )),
+          // Positioned(
+          //     top: 90,
+          //     left: 0,
+          //     right: 0,
+          //     // insert picture here schedule.png
+          //     child: BoxDecoration(
+          //     image: DecorationImage(
+          //         image: AssetImage('assets/images/schedulepng.png'),
+          // )),
+
+          //     )
+        ]);
+
+        // Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+        //   Text(snapshot.data!.origin.split(",")[0]),
+        //   Text(snapshot.data!.destination.split(",")[0])
+        // ]),
       } else if (snapshot.hasError) {
         print('failure');
         return Text('${snapshot.error}');
