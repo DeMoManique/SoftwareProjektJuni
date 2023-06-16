@@ -15,11 +15,11 @@ Widget clockWidget(BuildContext context) {
         String second = now.second.toString();
         if (second.length == 1) {
           // make so it is 12.00 instead of 12.0
-          second = '0' + second;
+          second = '0$second';
         }
         if (minute.length == 1) {
           // make so it is 12.00 instead of 12.0
-          minute = '0' + minute;
+          minute = '0$minute';
         }
         return Square(
           context,
@@ -32,8 +32,8 @@ Widget clockWidget(BuildContext context) {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    '${now.hour}:${minute}',
-                    style: TextStyle(
+                    '${now.hour}:$minute',
+                    style: const TextStyle(
                       fontFamily: 'MoiraiOne',
                       fontSize: 55,
                       fontWeight: FontWeight.bold,
@@ -43,8 +43,8 @@ Widget clockWidget(BuildContext context) {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(0,0,0,50),
                     child: Text(
-                      '${second}',
-                      style: TextStyle(
+                      '$second',
+                      style: const TextStyle(
                         fontFamily: 'MoiraiOne',
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
