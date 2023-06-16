@@ -5,12 +5,10 @@ import 'package:geolocator/geolocator.dart';
 Future<Weather> fetchWeather() async {
   String key = '486495597ff0499394a202301230606'; // API key
   LocationPermission permission;
-permission = await Geolocator.requestPermission();
+  permission = await Geolocator.requestPermission();
   Position position = await Geolocator.getCurrentPosition(
       desiredAccuracy: LocationAccuracy.high);
   String location = '${position.latitude},${position.longitude}'; // location
-  //ignore: avoid_print
-  print(location);
   String URL =
       'https://api.weatherapi.com/v1/current.json?q=$location&key=$key';
   final response = await http.get(Uri.parse(URL));
@@ -19,16 +17,6 @@ permission = await Geolocator.requestPermission();
   } else {
     throw Exception('Failed to create');
   }
-}
-
-main() async {
-  var weathernow = await fetchWeather();
-// ignore: avoid_print
-  print(weathernow.location +
-      " " +
-      weathernow.temperature.toString() +
-      " C°, " +
-      weathernow.condition);
 }
 
 class Weather {

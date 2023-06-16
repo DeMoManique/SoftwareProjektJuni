@@ -3,7 +3,9 @@ import 'package:life_hub/Widgets/widgetSetup.dart';
 import 'package:life_hub/Widgets/widgetShapes.dart';
 
 @override
-Widget calenderWidget(BuildContext context, List list) {
+Widget calenderWidget(BuildContext context) {
+
+  List list = ['Tandlæge', 'læge', 'hej'];
 
   return Square(
     context,

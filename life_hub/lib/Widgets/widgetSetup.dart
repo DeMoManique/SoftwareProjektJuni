@@ -5,6 +5,11 @@ double getWidth(BuildContext context) {
   return width;
 }
 
+double getHeight(BuildContext context) {
+  double height = MediaQuery.of(context).size.height;
+  return height;
+}
+
 String getName() {
   return 'Lucas';
 }
@@ -15,3 +20,10 @@ List<String> getShoppingList() {
 }
 
 List<String> tempShop = [];
+
+List<String> getTODOList() {
+  //TODO få indkøbsliste fra database?
+  return tempTODO;
+}
+
+List<String> tempTODO = [];
