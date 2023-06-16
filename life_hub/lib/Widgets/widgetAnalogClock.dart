@@ -35,12 +35,10 @@ Widget analogClockWidget(BuildContext context) {
                 decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: Color.fromARGB(255, 240, 251, 255)),
-                    child: RotatedBox(
-                      quarterTurns: 3,
-                      
-                    ),
+                child: RotatedBox(
+                  quarterTurns: 3,
+                ),
               )),
-              
         );
       }));
 }

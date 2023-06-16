@@ -4,12 +4,14 @@ import 'package:life_hub/Widgets/widgetSetup.dart';
 import 'package:life_hub/Widgets/widgetShapes.dart';
 
 @override
-Widget weatherWidget(BuildContext context) {
+Widget weatherWidget(BuildContext context, WeatherScreen weatherScreen) {
   return Square(
     context,
     color: Colors.amber[200],
     child: getWeather(),
-    function: weatherScreen,
+    function: () {
+      Navigator.pushNamed(context, '/WeatherScreen');
+    },
   );
 }
 
@@ -98,4 +100,60 @@ getWeather() {
   );
 }
 
-void weatherScreen() {}
+class WeatherScreen extends StatefulWidget {
+  WeatherScreen({super.key});
+  _WeatherScreenState _weatherScreenState = _WeatherScreenState();
+
+  @override
+  State<WeatherScreen> createState() => _weatherScreenState;
+}
+
+class _WeatherScreenState extends State<WeatherScreen> {
+  refresh() {
+    setState(() {});
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Weather'),
+      ),
+      body: updateWeather(),
+    );
+  }
+
+  updateWeather() {
+    late Future<weather.Weather> futureWeather = weather.fetchWeather();
+
+    return FutureBuilder(
+        future: futureWeather,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            String location = snapshot.data!.location;
+            String temperature = snapshot.data!.temperature.toString();
+            String feelsLike = snapshot.data!.temperatureFeel.toString();
+            String windSpeed =
+                (snapshot.data!.windSpeed / 3.6).toStringAsFixed(2);
+            String uv = snapshot.data!.uv.toString();
+            String imageURL = 'https:${snapshot.data!.imageURL}';
+            return Center(
+              child: Column(
+                children: [
+                  Text(location),
+                  Text(temperature),
+                  Text(feelsLike),
+                  Text(windSpeed),
+                  Text(uv),
+                  Image(image: NetworkImage(imageURL))
+                ],
+              ),
+            );
+          } else if (snapshot.hasError) {
+            print('failure');
+            return Text('${snapshot.error}');
+          }
+          return const CircularProgressIndicator();
+        });
+  }
+}

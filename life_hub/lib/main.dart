@@ -7,7 +7,7 @@ import 'package:life_hub/Widgets/widgetAd.dart';
 import 'package:life_hub/Widgets/widgetSetup.dart';
 import 'package:life_hub/Widgets/widgetShapes.dart';
 import 'package:life_hub/Widgets/widgetRejseplan.dart';
-import 'package:life_hub/Widgets/widgetShopList.dart';
+import 'package:life_hub/Widgets/widgetList.dart';
 import 'package:life_hub/Widgets/widgetWeather.dart';
 
 import 'Widgets/widgetClock.dart';
@@ -29,10 +29,12 @@ class MyApp extends StatelessWidget {
         ShoppingListScreen(parentWidget: shoppingWidget);
     TODOWidget todoWidget = TODOWidget(color: Colors.blue);
     TodoListScreen todoScreen = TodoListScreen(parentWidget: todoWidget);
+    WeatherScreen weatherScreen = WeatherScreen();
 
     HomeScreen homeScreen = HomeScreen(
       shoppingWidget: shoppingWidget,
       todoWidget: todoWidget,
+      weatherScreen: weatherScreen,
     );
 
     return MaterialApp(
@@ -42,6 +44,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => homeScreen,
         '/ShoppingScreen': (context) => shopScreen,
         '/TODOScreen': (context) => todoScreen,
+        '/WeatherScreen': (context) => weatherScreen,
       },
     );
   }
@@ -54,19 +57,24 @@ void test() {
 class HomeScreen extends StatefulWidget {
   final ShoppingWidget shoppingWidget;
   final TODOWidget todoWidget;
+  final WeatherScreen weatherScreen;
   HomeScreen(
-      {super.key, required this.shoppingWidget, required this.todoWidget});
+      {super.key,
+      required this.shoppingWidget,
+      required this.todoWidget,
+      required this.weatherScreen});
 
   @override
   State<HomeScreen> createState() =>
-      _HomeScreenState(shoppingWidget, todoWidget);
+      _HomeScreenState(shoppingWidget, todoWidget, weatherScreen);
 }
 
 class _HomeScreenState extends State<HomeScreen> {
   final ShoppingWidget shoppingWidget;
   final TODOWidget todoWidget;
+  final WeatherScreen weatherScreen;
 
-  _HomeScreenState(this.shoppingWidget, this.todoWidget);
+  _HomeScreenState(this.shoppingWidget, this.todoWidget, this.weatherScreen);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,7 +93,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [weatherWidget(context), shoppingWidget],
+                    children: [
+                      weatherWidget(context, weatherScreen),
+                      shoppingWidget
+                    ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
