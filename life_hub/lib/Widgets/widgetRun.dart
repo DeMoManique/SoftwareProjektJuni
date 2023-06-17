@@ -1,7 +1,10 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:life_hub/Pages/leaderBoardScreen.dart';
 import 'package:life_hub/Widgets/widgetShapes.dart';
 
 @override
@@ -42,6 +45,25 @@ class _SpeedPage extends State<SpeedPage> {
     super.initState();
     _getLocation();
     showSpeed = false;
+  }
+
+  Future<void> saveUserTopSpeed() async {
+    try {
+      final user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        final userRef =
+            FirebaseFirestore.instance.collection('users').doc(user.uid);
+        final userData = await userRef.get();
+
+        if (userData.exists && userData.get('topSpeed') < topSpeed) {
+          // User already exists, update their topSpeed field
+          await userRef.update({'topSpeed': topSpeed});
+        } else if (!userData.exists) {
+          // User doesn't exist, create a new user document
+          await userRef.set({'name': user.displayName, 'topSpeed': topSpeed});
+        }
+      }
+    } catch (e) {}
   }
 
   String text = "Start";
@@ -107,7 +129,12 @@ class _SpeedPage extends State<SpeedPage> {
         Padding(
           padding: const EdgeInsets.fromLTRB(0, 0, 15, 0),
           child: GestureDetector(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const LeaderboardScreen()));
+            },
             child: Icon(Icons.leaderboard),
           ),
         )
@@ -124,6 +151,7 @@ class _SpeedPage extends State<SpeedPage> {
                 }
                 if (text == "Stop") {
                   stopRecordingSpeed();
+                  saveUserTopSpeed();
                   showDialog(
                     context: context,
                     builder: (context) => AlertDialog(

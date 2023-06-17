@@ -67,3 +67,47 @@ class MyButton extends StatelessWidget {
     );
   }
 }
+
+class myLeaderBoardCard extends StatelessWidget {
+  final String pos;
+  final String name;
+  final Color;
+  final String speed;
+  final double padding;
+  const myLeaderBoardCard(
+      {required this.pos,
+      required this.Color,
+      required this.name,
+      required this.padding,
+      required this.speed});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
+      shadowColor: Colors.grey[200],
+      color: this.Color,
+      child: Container(
+        padding: EdgeInsets.all(this.padding),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(this.pos,
+                style: TextStyle(
+                    color: Colors.black, fontWeight: FontWeight.bold)),
+            Text(
+              name,
+              style:
+                  TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+            ),
+            Text(
+              this.speed,
+              style:
+                  TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:life_hub/Pages/leaderBoardScreen.dart';
 import 'package:life_hub/Pages/signinScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:life_hub/Widgets/widgetAnalogClock.dart';
@@ -59,6 +60,7 @@ class MyApp extends StatelessWidget {
         '/TODOScreen': (context) => todoScreen,
         '/WeatherScreen': (context) => weatherScreen,
         '/speedPage': (context) => const SpeedPage(),
+        '/leaderboardPage': (context) => const LeaderboardScreen(),
       },
     );
   }
