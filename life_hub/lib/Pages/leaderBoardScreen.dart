@@ -1,9 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:life_hub/Widgets/widgetComponents.dart';
-
-void main() => runApp(MaterialApp(home: LeaderboardScreen()));
 
 class LeaderboardScreen extends StatefulWidget {
   const LeaderboardScreen({super.key});
@@ -13,20 +12,23 @@ class LeaderboardScreen extends StatefulWidget {
 }
 
 class _LeaderboardScreenState extends State<LeaderboardScreen> {
-  Map<String, String> speeds = {};
-  Future getSpeeds() async {
-    await FirebaseFirestore.instance
-        .collection('users')
-        .get()
-        .then((snapshot) => snapshot.docs.forEach((element) {
-              print(element.reference);
-            }));
+  Map<String, dynamic>? data;
+  List<String> speeds = [];
+  late final Future? getSpeeds;
+  void initState() {
+    getSpeeds = getSpeed();
+    super.initState();
   }
 
-  @override
-  void initState() {
-    getSpeeds();
-    super.initState();
+  Future getSpeed() async {
+    await FirebaseFirestore.instance
+        .collection('users')
+        .orderBy('topSpeed', descending: true)
+        .limit(50)
+        .get()
+        .then((value) => value.docs.forEach((element) {
+              speeds.add(element.reference.id);
+            }));
   }
 
   List<String> names = [
@@ -101,7 +103,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomScrollView(
-        slivers: <Widget>[
+        slivers: [
           SliverAppBar(
             backgroundColor: Color.fromRGBO(67, 176, 176, 1),
             pinned: true,
@@ -166,11 +168,16 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
               ),
             ),
           ),
-          SliverList(
-              delegate: SliverChildBuilderDelegate(
-            (BuildContext context, int index) => buildList(context, index),
-            childCount: litems.length,
-          ))
+          FutureBuilder(
+            future: getSpeeds,
+            builder: (context, snapshot) {
+              return SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                (BuildContext context, int index) => Tile(speeds[index], index),
+                childCount: speeds.length,
+              ));
+            },
+          )
         ],
       ),
     );
@@ -178,8 +185,6 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
 
   Widget buildList(BuildContext txt, int index) {
     int ind = index + 1;
-    final pos = litems[index];
-    final name = names[index];
 
     Widget listItem;
 
@@ -187,30 +192,30 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
       listItem = myLeaderBoardCard(
           pos: ind.toString(),
           Color: Color(0xFFD0B13E),
-          name: "test",
+          name: data!['name'].toString(),
           padding: 35.0,
-          speed: "10.0");
+          speed: data!['topSpeed'].toStringAsFixed(2) + ' km/h');
     } else if (ind == 2) {
       listItem = myLeaderBoardCard(
           pos: ind.toString(),
           Color: const Color.fromARGB(255, 190, 190, 190),
-          name: name,
+          name: data!['name'].toString(),
           padding: 28.0,
-          speed: "10.0");
+          speed: data!['topSpeed'].toStringAsFixed(2) + ' km/h');
     } else if (ind == 3) {
       listItem = myLeaderBoardCard(
           pos: ind.toString(),
           Color: Color(0xFFA45735),
-          name: name,
+          name: data!['name'].toString(),
           padding: 20.0,
-          speed: "10.0");
+          speed: data!['topSpeed'].toStringAsFixed(2) + ' km/h');
     } else {
       listItem = myLeaderBoardCard(
           pos: ind.toString(),
           Color: Colors.white,
-          name: name,
+          name: data!['name'].toString(),
           padding: 15.0,
-          speed: "10.0");
+          speed: data!['topSpeed'].toStringAsFixed(2) + ' km/h');
     }
 
     return Stack(
@@ -220,6 +225,24 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
           child: listItem,
         ),
       ],
+    );
+  }
+
+  Widget Tile(String documentID, int index) {
+    CollectionReference highscores =
+        FirebaseFirestore.instance.collection('users');
+
+    return FutureBuilder<DocumentSnapshot>(
+      future: highscores.doc(documentID).get(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          data = snapshot.data!.data() as Map<String, dynamic>;
+
+          return buildList(context, index);
+        } else {
+          return LinearProgressIndicator();
+        }
+      },
     );
   }
 }

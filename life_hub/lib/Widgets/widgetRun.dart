@@ -38,7 +38,7 @@ class SpeedPage extends StatefulWidget {
 class _SpeedPage extends State<SpeedPage> {
   bool showSpeed = false;
   bool ifStopIsClicked = false;
-  String _speedKph = "";
+  String _speedKph = "0.0";
 
   @override
   void initState() {

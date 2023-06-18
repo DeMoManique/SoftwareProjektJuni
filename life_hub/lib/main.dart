@@ -104,7 +104,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 onTap: () {
                   FirebaseAuth.instance.signOut();
                 },
-                child: Icon(Icons.logout))
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 0, 15, 0),
+                  child: Icon(Icons.logout),
+                ))
           ],
         ),
         body: LayoutBuilder(builder:
