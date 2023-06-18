@@ -9,7 +9,7 @@ Future<Route> fetchRoutes() async {
   String location = '${position.latitude}, ${position.longitude}'; // location
 
 
-  String key = 'AIzaSyBBqzjnUpxLRN4jHKKyDxQ3oXPTmWqlEC8';
+  String key = '+';// api key fra disc
   String des = '55.7836959, 12.5183346';
   String origin = '55.673185, 12.563980';
   String mode = 'transit';
