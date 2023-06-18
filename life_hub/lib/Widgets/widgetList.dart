@@ -47,7 +47,7 @@ class _ListWidgetState extends State<ListWidget> {
       context,
       color: color,
       child: ListView(
-        children: StringListToTextList(list()),
+        children: listItems,
       ),
       function: () {
         Navigator.pushNamed(context, '$screenName');
@@ -86,6 +86,7 @@ class _ListWidgetScreenState extends State<ListWidgetScreen> {
   final Function list;
   final ListWidget parentWidget;
   _ListWidgetScreenState(this.name, this.list, this.parentWidget);
+  List<Widget> listItems = StringListToTextListForScreen(list);
 
   refresh() {
   //  setState(() {});
@@ -113,7 +114,7 @@ class _ListWidgetScreenState extends State<ListWidgetScreen> {
           child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: ListView(
-          children: StringListToTextListForScreen(list(), context, refresh),
+          children: listItems;
         ),
       )),
       floatingActionButton: FloatingActionButton(
