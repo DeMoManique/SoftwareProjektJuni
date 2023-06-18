@@ -160,11 +160,11 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
   }
 
   Widget Tile(String documentID, int index) {
-    CollectionReference highscores =
+    CollectionReference topSpeeds =
         FirebaseFirestore.instance.collection('users');
 
     return FutureBuilder<DocumentSnapshot>(
-      future: highscores.doc(documentID).get(),
+      future: topSpeeds.doc(documentID).get(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           data = snapshot.data!.data() as Map<String, dynamic>;

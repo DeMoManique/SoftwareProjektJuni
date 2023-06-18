@@ -55,8 +55,11 @@ class _SpeedScreen extends State<SpeedScreen> {
         final userData = await userRef.get();
 
         if (userData.exists && userData.get('topSpeed') < topSpeed) {
-          // User already exists, update their topSpeed field
-          await userRef.update({'topSpeed': topSpeed});
+          if (topSpeed >= 50.0) {
+          } else {
+            // User already exists, update their topSpeed field
+            await userRef.update({'topSpeed': topSpeed});
+          }
         } else if (!userData.exists) {
           // User doesn't exist, create a new user document in firebase
           await userRef.set({'name': user.displayName, 'topSpeed': topSpeed});
@@ -102,6 +105,7 @@ class _SpeedScreen extends State<SpeedScreen> {
         if (speedKph > topSpeed) {
           topSpeed = speedKph;
         }
+
         setState(() {
           _speedKph = speedKph.toStringAsFixed(2);
         });
@@ -111,6 +115,7 @@ class _SpeedScreen extends State<SpeedScreen> {
 
   void stopRecordingSpeed() {
     setState(() {
+      if (topSpeed >= 50.0) {}
       _speedKph = '0';
       text = "Start";
       showSpeed = false;
@@ -150,13 +155,12 @@ class _SpeedScreen extends State<SpeedScreen> {
                     context: context,
                     builder: (context) => AlertDialog(
                       title: const Text('Top Speed'),
-                      content: Text(
-                          'Your top speed was: ${topSpeed.toStringAsFixed(2)} km/h'),
+                      content: verifySpeed(),
                       actions: [
                         TextButton(
                           onPressed: () {
                             Navigator.pop(context);
-                            topSpeed = 0;
+                            topSpeed = 0.0;
                           },
                           child: const Text('OK'),
                         ),
@@ -175,5 +179,17 @@ class _SpeedScreen extends State<SpeedScreen> {
         ],
       ),
     );
+  }
+
+  Widget verifySpeed() {
+    if (topSpeed >= 50.0) {
+      topSpeed = 0;
+      return Text('Your speed was sus');
+    }
+    if (topSpeed <= 50.0) {
+      return Text('Your top speed was: ${topSpeed.toStringAsFixed(2)} km/h');
+    } else {
+      return Text('');
+    }
   }
 }
