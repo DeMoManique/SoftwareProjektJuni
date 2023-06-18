@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:life_hub/Widgets/widgetAnalogClock.dart';
 import 'package:life_hub/Widgets/widgetCalender.dart';
@@ -14,6 +15,8 @@ import 'package:life_hub/Widgets/widgetWeather.dart';
 import 'Widgets/widgetClock.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  Firebase.initializeApp();
   runApp(const MyApp());
 }
 
