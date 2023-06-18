@@ -30,13 +30,14 @@ class _ListWidgetState extends State<ListWidget> {
   _ListWidgetState(
       {required this.list, required this.screenName, required this.color});
   refresh() {
-    setState(() {});
+    //setState(() {});
   }
+  List<Widget> listItems = [];
 
   @override
   void initState() {
     super.initState();
-    
+    listItems = StringListToTextList(list);
     refresh();
   }
 
@@ -87,7 +88,12 @@ class _ListWidgetScreenState extends State<ListWidgetScreen> {
   _ListWidgetScreenState(this.name, this.list, this.parentWidget);
 
   refresh() {
-    setState(() {});
+  //  setState(() {});
+  }
+  void initState() {
+    super.initState();
+    listItems = StringListToTextListForScreen(list);
+    refresh();
   }
 
   @override
