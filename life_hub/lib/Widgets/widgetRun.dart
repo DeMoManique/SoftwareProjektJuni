@@ -16,7 +16,7 @@ Widget widgetRun(BuildContext context) {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          "IShowSpeed",
+          "Show Speed",
           style: TextStyle(
               fontSize: 50, color: Colors.white, fontWeight: FontWeight.bold),
         ),

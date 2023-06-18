@@ -24,10 +24,20 @@ class _ListWidgetState extends State<ListWidget> {
   final String screenName;
   final Color color;
 
+
+
+
   _ListWidgetState(
       {required this.list, required this.screenName, required this.color});
   refresh() {
     setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    
+    refresh();
   }
 
   @override
