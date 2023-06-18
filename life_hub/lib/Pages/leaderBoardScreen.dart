@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:life_hub/Widgets/widgetComponents.dart';
@@ -31,74 +30,6 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
             }));
   }
 
-  List<String> names = [
-    "1",
-    "2",
-    "3",
-    "4",
-    "1",
-    "2",
-    "3",
-    "4",
-    "1",
-    "2",
-    "3",
-    "4",
-    "1",
-    "2",
-    "3",
-    "4",
-    "1",
-    "2",
-    "3",
-    "4",
-    "1",
-    "2",
-    "3",
-    "4",
-    "1",
-    "2",
-    "3",
-    "4",
-    "1",
-    "2",
-    "3",
-    "4"
-  ];
-  List<String> litems = [
-    "1",
-    "2",
-    "3",
-    "4",
-    "1",
-    "2",
-    "3",
-    "4",
-    "1",
-    "2",
-    "3",
-    "4",
-    "1",
-    "2",
-    "3",
-    "4",
-    "1",
-    "2",
-    "3",
-    "4",
-    "1",
-    "2",
-    "3",
-    "4",
-    "1",
-    "2",
-    "3",
-    "4",
-    "1",
-    "2",
-    "3",
-    "4"
-  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -136,7 +67,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                           ),
                         ),
                         Text(
-                          "Score",
+                          "Speed",
                           style: TextStyle(
                               color: Colors.grey[200],
                               fontWeight: FontWeight.bold,
@@ -183,7 +114,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
     );
   }
 
-  Widget buildList(BuildContext txt, int index) {
+  Widget buildLeaderboard(BuildContext txt, int index) {
     int ind = index + 1;
 
     Widget listItem;
@@ -238,9 +169,10 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
         if (snapshot.connectionState == ConnectionState.done) {
           data = snapshot.data!.data() as Map<String, dynamic>;
 
-          return buildList(context, index);
+          return buildLeaderboard(context, index);
         } else {
-          return LinearProgressIndicator();
+          return LinearProgressIndicator(
+              color: Color.fromRGBO(67, 176, 176, 1));
         }
       },
     );

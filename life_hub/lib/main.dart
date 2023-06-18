@@ -59,8 +59,8 @@ class MyApp extends StatelessWidget {
         '/ShoppingScreen': (context) => shopScreen,
         '/TODOScreen': (context) => todoScreen,
         '/WeatherScreen': (context) => weatherScreen,
-        '/speedPage': (context) => const SpeedPage(),
-        '/leaderboardPage': (context) => const LeaderboardScreen(),
+        '/speedScreen': (context) => const SpeedScreen(),
+        '/leaderboardScreen': (context) => const LeaderboardScreen(),
       },
     );
   }
@@ -97,6 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Color.fromRGBO(67, 176, 176, 1),
         appBar: AppBar(
           automaticallyImplyLeading: false,
+          forceMaterialTransparency: true,
           backgroundColor: Color.fromRGBO(48, 125, 125, 1),
           title: Text('Hej ${FirebaseAuth.instance.currentUser?.displayName}'),
           actions: [

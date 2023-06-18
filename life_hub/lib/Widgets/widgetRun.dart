@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:life_hub/Pages/leaderBoardScreen.dart';
 import 'package:life_hub/Widgets/widgetShapes.dart';
 
 @override
@@ -24,18 +23,18 @@ Widget widgetRun(BuildContext context) {
       ],
     ),
     function: () {
-      Navigator.pushNamed(context, '/speedPage');
+      Navigator.pushNamed(context, '/speedScreen');
     },
   );
 }
 
-class SpeedPage extends StatefulWidget {
+class SpeedScreen extends StatefulWidget {
   @override
-  State<SpeedPage> createState() => _SpeedPage();
-  const SpeedPage({super.key});
+  State<SpeedScreen> createState() => _SpeedScreen();
+  const SpeedScreen({super.key});
 }
 
-class _SpeedPage extends State<SpeedPage> {
+class _SpeedScreen extends State<SpeedScreen> {
   bool showSpeed = false;
   bool ifStopIsClicked = false;
   String _speedKph = "0.0";
@@ -59,7 +58,7 @@ class _SpeedPage extends State<SpeedPage> {
           // User already exists, update their topSpeed field
           await userRef.update({'topSpeed': topSpeed});
         } else if (!userData.exists) {
-          // User doesn't exist, create a new user document
+          // User doesn't exist, create a new user document in firebase
           await userRef.set({'name': user.displayName, 'topSpeed': topSpeed});
         }
       }
@@ -89,19 +88,17 @@ class _SpeedPage extends State<SpeedPage> {
   void _getLocation() async {
     LocationPermission permission = await Geolocator.requestPermission();
     if (permission == LocationPermission.denied) {
-      // Handle the case where the user has denied location permission
     } else if (permission == LocationPermission.deniedForever) {
-      // Handle the case where the user has permanently denied location permission
     } else {
-      // Location permission has been granted, start receiving location updates
+      //permission granted
       Geolocator.getPositionStream(
         locationSettings: const LocationSettings(
           accuracy: LocationAccuracy.best,
           distanceFilter: 10,
         ),
       ).listen((position) {
-        double speedKph =
-            position.speed * 3.6; // This is your speed in kilometers per hour
+        // speed in kph
+        double speedKph = position.speed * 3.6;
         if (speedKph > topSpeed) {
           topSpeed = speedKph;
         }
@@ -130,10 +127,7 @@ class _SpeedPage extends State<SpeedPage> {
           padding: const EdgeInsets.fromLTRB(0, 0, 15, 0),
           child: GestureDetector(
             onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const LeaderboardScreen()));
+              Navigator.of(context).pushNamed('/leaderboardScreen');
             },
             child: Icon(Icons.leaderboard),
           ),
