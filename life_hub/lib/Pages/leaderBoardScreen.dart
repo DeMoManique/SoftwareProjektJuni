@@ -20,6 +20,9 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
     super.initState();
   }
 
+  /*
+   query on the database to retrive topspeeds in descending order limited to only 50 documents
+  */
   Future getSpeed() async {
     await FirebaseFirestore.instance
         .collection('users')
@@ -27,6 +30,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
         .limit(50)
         .get()
         .then((value) => value.docs.forEach((element) {
+              // saving the refId in the speeds list
               speeds.add(element.reference.id);
             }));
   }
@@ -96,6 +100,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
   }
 
   Widget buildLeaderboard(BuildContext context, int index) {
+    //placement starting from 1st
     int placement = index + 1;
 
     if (placement == 1) {
@@ -130,17 +135,20 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
   }
 
   Widget loadLeaderBoardData(String documentID, int index) {
+    // ref to the collection
     CollectionReference topSpeeds =
         FirebaseFirestore.instance.collection('users');
 
     return FutureBuilder<DocumentSnapshot>(
+      // getting the specified document
       future: topSpeeds.doc(documentID).get(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
+          //loading the data into a map and building the UI
           data = snapshot.data!.data() as Map<String, dynamic>;
-
           return buildLeaderboard(context, index);
         } else {
+          //showing a progressbar while loading the data
           return const LinearProgressIndicator(
               minHeight: 1, color: Color.fromRGBO(67, 176, 176, 1));
         }
