@@ -106,16 +106,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       weatherScreen: WeatherScreen(),
                     )));
       }
-    } catch (e) {
-      if (e is FirebaseAuthException) {
-        if (e.code == 'invalid-email') {
-          print('Invalid email format');
-        } else {
-          print('Authentication error: ${e.code}');
-        }
-      } else {
-        print('Error: $e');
-      }
-    }
+    } catch (e) {}
   }
 }
