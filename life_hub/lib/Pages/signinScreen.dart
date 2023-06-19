@@ -152,7 +152,18 @@ class _SignInScreenState extends State<SignInScreen> {
               height: 60,
               child: GestureDetector(
                   onTap: () {
-                    AuthService().signInWithGoogle();
+                    AuthService().signInWithGoogle().then((value) {
+                      print("duxk duf");
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => HomeScreen(
+                                shoppingWidget:
+                                    ShoppingWidget(color: Colors.red),
+                                todoWidget: TODOWidget(color: Colors.blue),
+                                weatherScreen: WeatherScreen(),
+                              )));
+                });
                   },
                   child: Image.asset('assets/images/google.png')),
             ),
@@ -162,5 +173,7 @@ class _SignInScreenState extends State<SignInScreen> {
     );
   }
 
-  void signInWithGoogle() {}
+  void signInWithGoogle() {
+    print("I dont do shit");
+  }
 }

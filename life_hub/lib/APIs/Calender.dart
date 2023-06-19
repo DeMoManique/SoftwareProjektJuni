@@ -10,14 +10,13 @@ import 'package:googleapis_auth/googleapis_auth.dart';
 import 'package:http/io_client.dart';
 import 'package:http/http.dart';
 import 'package:extension_google_sign_in_as_googleapis_auth/extension_google_sign_in_as_googleapis_auth.dart';
+import 'package:life_hub/Pages/signinScreen.dart';
 
 
-
-
-  Future<List> signInWithGoogle() async {
-
+  getAuthClient() async{
     GoogleSignIn? googleSignIn = GoogleSignIn(
-      scopes: [CalendarApi.calendarEventsScope], 
+      scopes: [CalendarApi.calendarEventsScope],
+
     );
   
     GoogleSignInAccount? googleUser = await googleSignIn.signIn();
@@ -28,14 +27,23 @@ import 'package:extension_google_sign_in_as_googleapis_auth/extension_google_sig
       accessToken: googleAuth?.accessToken,
       idToken: googleAuth?.idToken,
     );
+
+
     UserCredential? userCredential  = await FirebaseAuth.instance.signInWithCredential(credential);
 
     print(userCredential.user?.displayName);
 
-    AuthClient? authenticateClient = await googleSignIn.authenticatedClient();
-    assert(authenticateClient != null, "Client non existent");
 
-    final api = CalendarApi(authenticateClient!);
+    AuthClient? authenticateClient = await googleSignIn.authenticatedClient();
+    return authenticateClient;
+  }
+
+
+  Future<List> signInWithGoogle() async {
+
+    assert(getAuthClient() != null, "Client non existent");
+
+    final api = CalendarApi(await getAuthClient()!);
     assert(api != null, "Api non existent");
     
     assert(api.events.list('primary', timeMin: DateTime.now()) != null , "Faulty");
