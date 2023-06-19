@@ -84,7 +84,7 @@ class myLeaderBoardCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
+      margin: EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
       color: this.Color,
       child: Container(
         padding: EdgeInsets.fromLTRB(20, this.padding, 20, this.padding),
