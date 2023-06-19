@@ -22,8 +22,8 @@ class Shape extends Card {
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(20))),
           child: SizedBox(
-              width: getWidth(context) * width!,
-              height: getWidth(context) * height!,
+              // width: getWidth(context) * width!,
+              // height: getWidth(context) * height!,
               child: Padding(padding: const EdgeInsets.all(10), child: child))),
     );
   }
