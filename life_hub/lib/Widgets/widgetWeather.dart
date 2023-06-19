@@ -10,7 +10,8 @@ Widget weatherWidget(BuildContext context, WeatherScreen weatherScreen) {
     color: Colors.amber[200],
     child: getWeather(),
     function: () {
-      Navigator.pushNamed(context, '/WeatherScreen');
+      //TODO Gives an exception
+      //Navigator.pushNamed(context, '/WeatherScreen');
     },
   );
 }
@@ -37,56 +38,32 @@ getWeather() {
           decoration: BoxDecoration(
               image: DecorationImage(
                   image: NetworkImage(imageURL), fit: BoxFit.contain)),
-          child: Column(
-            children: [
-              Align(
-                alignment: Alignment.topLeft,
-                child: Padding(
-                  padding: const EdgeInsets.all(0),
-                  child: Text(
-                    location,
-                    style: Theme.of(context).textTheme.headlineMedium,
-                  ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '$temperature C°',
+                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                 ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      //Temperature
-                      Align(
-                        alignment: Alignment.topLeft,
-                        child: Padding(
-                          padding: EdgeInsets.all(0),
-                          child: Text(
-                            '$temperature C°',
-                            style: TextStyle(fontSize: 20),
-                          ),
-                        ),
-                      ),
-                      //Temperature feels like
-                      Align(
-                          alignment: Alignment.topLeft,
-                          child: Text('$feelsLike C°')),
-                      //Windspeed
-                      Align(
-                          alignment: Alignment.topLeft,
-                          child: Text('$windSpeed m/s')),
-                    ],
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
+                Text(
+                  '$feelsLike C°',
+                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.w300),
+                ),
+                Row(
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('$uv UV'),
+                        Text('Wind: $windSpeed m/s'),
+                        Text('UV: $uv'),
                       ],
-                    ),
-                  )
-                ],
-              )
-            ],
+                    )
+                  ],
+                )
+              ],
+            ),
           ),
         );
       } else if (snapshot.hasError) {
