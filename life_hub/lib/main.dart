@@ -13,6 +13,7 @@ import 'package:life_hub/Widgets/widgetRejseplan.dart';
 import 'package:life_hub/Widgets/widgetList.dart';
 import 'package:life_hub/Widgets/widgetWeather.dart';
 import 'package:life_hub/Widgets/widgetRun.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'Widgets/widgetClock.dart';
 
 void main() async {
@@ -94,67 +95,121 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color.fromRGBO(67, 176, 176, 1),
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          forceMaterialTransparency: true,
-          backgroundColor: Color.fromRGBO(48, 125, 125, 1),
-          title: Text('Hej ${FirebaseAuth.instance.currentUser?.displayName}'),
-          actions: [
-            GestureDetector(
-                onTap: () {
-                  FirebaseAuth.instance.signOut();
-                },
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 0, 15, 0),
-                  child: Icon(Icons.logout),
-                ))
-          ],
-        ),
-        body: LayoutBuilder(builder:
-            (BuildContext context, BoxConstraints viewportConstraints) {
-          return SingleChildScrollView(
-            child: ConstrainedBox(
-              constraints:
-                  BoxConstraints(minHeight: viewportConstraints.maxHeight),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      weatherWidget(context, weatherScreen),
-                      shoppingWidget
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [rejseplanWidget(context)],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Column(
-                        children: [
-                          clockWidget(context),
-                          todoWidget,
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          analogClockWidget(context),
-                          calenderWidget(context),
-                        ],
-                      ),
-                    ],
-                  ),
-                  Column(children: [
-                    widgetRun(context),
-                  ]),
-                ],
-              ),
-            ),
-          );
-        }));
+      backgroundColor: Color.fromRGBO(67, 176, 176, 1),
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        forceMaterialTransparency: true,
+        backgroundColor: Color.fromRGBO(48, 125, 125, 1),
+        title: Text('Hej ${FirebaseAuth.instance.currentUser?.displayName}'),
+        actions: [
+          GestureDetector(
+              onTap: () async {
+                await FirebaseAuth.instance.signOut();
+              },
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(0, 0, 15, 0),
+                child: Icon(Icons.logout),
+              ))
+        ],
+      ),
+      body: SingleChildScrollView(
+          child: StaggeredGrid.count(
+        crossAxisCount: 4,
+        mainAxisSpacing: 4,
+        crossAxisSpacing: 4,
+        children: [
+          StaggeredGridTile.count(
+              crossAxisCellCount: 2,
+              mainAxisCellCount: 2,
+              child: weatherWidget(context, weatherScreen)),
+          StaggeredGridTile.count(
+              crossAxisCellCount: 2,
+              mainAxisCellCount: 4,
+              child: shoppingWidget),
+          StaggeredGridTile.count(
+              crossAxisCellCount: 2,
+              mainAxisCellCount: 2,
+              child: analogClockWidget(context)),
+          StaggeredGridTile.count(
+              crossAxisCellCount: 4,
+              mainAxisCellCount: 2,
+              child: rejseplanWidget(context)),
+          StaggeredGridTile.count(
+              crossAxisCellCount: 2, mainAxisCellCount: 4, child: todoWidget),
+          StaggeredGridTile.count(
+              crossAxisCellCount: 2,
+              mainAxisCellCount: 1,
+              child: clockWidget(context)),
+          StaggeredGridTile.count(
+              crossAxisCellCount: 2,
+              mainAxisCellCount: 3,
+              child: calenderWidget(context)),
+          StaggeredGridTile.count(
+              crossAxisCellCount: 4,
+              mainAxisCellCount: 2,
+              child: widgetRun(context)),
+        ],
+      )
+
+          // GridView.custom(
+          //     gridDelegate: SliverQuiltedGridDelegate(
+          //         crossAxisCount: 2,
+          //         mainAxisSpacing: 4,
+          //         crossAxisSpacing: 4,
+          //         repeatPattern: QuiltedGridRepeatPattern.same,
+          //         pattern: [
+          //           QuiltedGridTile(1, 1),
+          //           QuiltedGridTile(1, 1),
+          //           QuiltedGridTile(1, 2),
+          //         ]),
+          //     childrenDelegate: SliverChildListDelegate([
+          //       weatherWidget(context, weatherScreen),
+          //       shoppingWidget,
+          //       rejseplanWidget(context),
+          //       clockWidget(context),
+          //       todoWidget,
+          //       widgetRun(context),
+          //       analogClockWidget(context),
+          //       calenderWidget(context),
+          //     ])
+
+          // Column(
+          //   children: [
+          //     Row(
+          //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          //       children: [
+          //         weatherWidget(context, weatherScreen),
+          //         shoppingWidget
+          //       ],
+          //     ),
+          //     Row(
+          //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          //       children: [rejseplanWidget(context)],
+          //     ),
+          //     Row(
+          //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          //       children: [
+          //         Column(
+          //           children: [
+          //             clockWidget(context),
+          //             todoWidget,
+          //           ],
+          //         ),
+          //         Column(
+          //           children: [
+          //             analogClockWidget(context),
+          //             calenderWidget(context),
+          //           ],
+          //         ),
+          //       ],
+          //     ),
+          //     Column(children: [
+          //       widgetRun(context),
+          //     ]),
+          //   ],
+          // ),
+          ),
+    );
   }
 
   refresh() {

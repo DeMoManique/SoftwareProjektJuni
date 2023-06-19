@@ -24,9 +24,7 @@ Widget clockWidget(BuildContext context) {
         return Square(
           context,
           color: Color.fromARGB(255, 169, 216, 235),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
+          child: Stack (
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

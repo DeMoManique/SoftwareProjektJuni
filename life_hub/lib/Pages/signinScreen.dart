@@ -7,6 +7,7 @@ import 'package:life_hub/Widgets/widgetComponents.dart';
 import 'package:life_hub/Widgets/widgetList.dart';
 import 'package:life_hub/Widgets/widgetWeather.dart';
 import 'package:life_hub/main.dart';
+import 'package:life_hub/services/auth_services.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({Key? key}) : super(key: key);
@@ -100,27 +101,66 @@ class _SignInScreenState extends State<SignInScreen> {
   Widget signUpOption() {
     return Padding(
       padding: const EdgeInsets.all(15.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
+      child: Column(
         children: [
-          const Text("Don't have an account?",
-              style: TextStyle(color: Colors.black)),
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const SignUpScreen()));
-            },
-            child: const Text(
-              " Register now",
-              style: TextStyle(
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              const Text("Don't have an account?",
+                  style: TextStyle(color: Colors.black)),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const SignUpScreen()));
+                },
+                child: const Text(
+                  " Register now",
+                  style: TextStyle(
+                      color: Color.fromRGBO(36, 94, 94, 1.0),
+                      fontWeight: FontWeight.bold),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          const Row(
+            children: [
+              Expanded(
+                child: Divider(
+                  thickness: 0.8,
                   color: Color.fromRGBO(36, 94, 94, 1.0),
-                  fontWeight: FontWeight.bold),
+                ),
+              ),
+              Text(' Or continue with google '),
+              Expanded(
+                child: Divider(
+                  thickness: 0.8,
+                  color: Color.fromRGBO(36, 94, 94, 1.0),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 24,
+          ),
+          GestureDetector(
+            child: Container(
+              height: 60,
+              child: GestureDetector(
+                  onTap: () {
+                    AuthService().signInWithGoogle();
+                  },
+                  child: Image.asset('assets/images/google.png')),
             ),
           )
         ],
       ),
     );
   }
+
+  void signInWithGoogle() {}
 }
