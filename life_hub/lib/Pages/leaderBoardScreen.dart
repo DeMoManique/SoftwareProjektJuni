@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:life_hub/Widgets/widgetComponents.dart';
 
 class LeaderboardScreen extends StatefulWidget {
@@ -14,6 +13,8 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
   Map<String, dynamic>? data;
   List<String> speeds = [];
   late final Future? getSpeeds;
+
+  @override
   void initState() {
     getSpeeds = getSpeed();
     super.initState();

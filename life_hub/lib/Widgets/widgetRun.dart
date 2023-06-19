@@ -36,7 +36,6 @@ class SpeedScreen extends StatefulWidget {
 
 class _SpeedScreen extends State<SpeedScreen> {
   bool showSpeed = false;
-  bool ifStopIsClicked = false;
   String _speedKph = "0.0";
 
   @override
@@ -184,12 +183,13 @@ class _SpeedScreen extends State<SpeedScreen> {
   Widget verifySpeed() {
     if (topSpeed >= 50.0) {
       topSpeed = 0;
-      return Text('Your speed was sus');
+      return const Text(
+          'Your speed was sus, and will therefore not be recorded');
     }
     if (topSpeed <= 50.0) {
       return Text('Your top speed was: ${topSpeed.toStringAsFixed(2)} km/h');
     } else {
-      return Text('');
+      return const Text('');
     }
   }
 }
