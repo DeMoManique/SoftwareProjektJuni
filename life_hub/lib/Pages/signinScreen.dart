@@ -162,5 +162,4 @@ class _SignInScreenState extends State<SignInScreen> {
     );
   }
 
-  void signInWithGoogle() {}
 }
