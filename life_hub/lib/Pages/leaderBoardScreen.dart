@@ -33,97 +33,96 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            backgroundColor: Color.fromRGBO(67, 176, 176, 1),
-            pinned: true,
-            snap: false,
-            floating: false,
-            expandedHeight: 100.0,
-            bottom: PreferredSize(
-              preferredSize: Size.fromHeight(4.0),
-              child: Container(
-                height: 50,
-                child: Container(
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("Postion",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20)),
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(0, 0, 25, 0),
-                          child: Text(
-                            "Name",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20),
-                          ),
-                        ),
-                        Text(
-                          "Speed",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20),
-                        )
-                      ],
+      appBar: AppBar(
+        automaticallyImplyLeading: true,
+        backgroundColor: Color.fromRGBO(67, 176, 176, 1),
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(20.0),
+          child: Container(
+            height: 50,
+            child: Container(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Postion",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20)),
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(0, 0, 25, 0),
+                      child: Text(
+                        "Name",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20),
+                      ),
                     ),
-                  ),
+                    Text(
+                      "Speed",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20),
+                    )
+                  ],
                 ),
               ),
             ),
           ),
-          FutureBuilder(
-            future: getSpeeds,
-            builder: (context, snapshot) {
-              return SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                (BuildContext context, int index) => Tile(speeds[index], index),
-                childCount: speeds.length,
-              ));
-            },
-          )
-        ],
+        ),
+      ),
+      body: FutureBuilder(
+        future: getSpeeds,
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return Center(
+              child: Text('Error: ${snapshot.error}'),
+            );
+          } else {
+            return ListView.builder(
+              itemBuilder: (context, index) =>
+                  loadLeaderBoardData(speeds[index], index),
+              itemCount: speeds.length,
+            );
+          }
+        },
       ),
     );
   }
 
-  Widget buildLeaderboard(BuildContext txt, int index) {
-    int ind = index + 1;
+  Widget buildLeaderboard(BuildContext context, int index) {
+    int placement = index + 1;
 
     Widget listItem;
 
-    if (ind == 1) {
+    if (placement == 1) {
       listItem = myLeaderBoardCard(
-          pos: ind.toString(),
+          pos: placement.toString(),
           Color: Color.fromARGB(255, 232, 203, 17),
           name: data!['name'].toString(),
           padding: 35,
           speed: data!['topSpeed'].toStringAsFixed(2) + ' km/h');
-    } else if (ind == 2) {
+    } else if (placement == 2) {
       listItem = myLeaderBoardCard(
-          pos: ind.toString(),
+          pos: placement.toString(),
           Color: const Color.fromARGB(255, 190, 190, 190),
           name: data!['name'].toString(),
           padding: 28.0,
           speed: data!['topSpeed'].toStringAsFixed(2) + ' km/h');
-    } else if (ind == 3) {
+    } else if (placement == 3) {
       listItem = myLeaderBoardCard(
-          pos: ind.toString(),
+          pos: placement.toString(),
           Color: Color(0xFFA45735),
           name: data!['name'].toString(),
           padding: 20.0,
           speed: data!['topSpeed'].toStringAsFixed(2) + ' km/h');
     } else {
       listItem = myLeaderBoardCard(
-          pos: ind.toString(),
+          pos: placement.toString(),
           Color: Colors.white,
           name: data!['name'].toString(),
           padding: 15.0,
@@ -139,7 +138,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
     );
   }
 
-  Widget Tile(String documentID, int index) {
+  Widget loadLeaderBoardData(String documentID, int index) {
     CollectionReference topSpeeds =
         FirebaseFirestore.instance.collection('users');
 
@@ -151,8 +150,8 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
 
           return buildLeaderboard(context, index);
         } else {
-          return LinearProgressIndicator(
-              color: Color.fromRGBO(67, 176, 176, 1));
+          return const LinearProgressIndicator(
+              minHeight: 1, color: Color.fromRGBO(67, 176, 176, 1));
         }
       },
     );
