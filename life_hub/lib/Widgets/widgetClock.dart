@@ -24,9 +24,8 @@ Widget clockWidget(BuildContext context) {
         return Square(
           context,
           color: Color.fromARGB(255, 169, 216, 235),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
+          child: Stack(
+            
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -35,7 +34,7 @@ Widget clockWidget(BuildContext context) {
                     '${now.hour}:$minute',
                     style: const TextStyle(
                       fontFamily: 'MoiraiOne',
-                      fontSize: 55,
+                      fontSize: 53,
                       fontWeight: FontWeight.bold,
                       color: Color.fromARGB(255, 0, 0, 0),
                     ),

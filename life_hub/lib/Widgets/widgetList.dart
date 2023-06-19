@@ -31,7 +31,6 @@ class _ListWidgetState extends State<ListWidget> {
   }
 
   @override
-  @override
   Widget build(BuildContext context) {
     return Square(
       context,

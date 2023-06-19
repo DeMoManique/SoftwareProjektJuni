@@ -22,8 +22,8 @@ class Shape extends Card {
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(20))),
           child: SizedBox(
-              width: getWidth(context) * width!,
-              height: getWidth(context) * height!,
+              // width: getWidth(context) * width!,
+              // height: getWidth(context) * height!,
               child: Padding(padding: const EdgeInsets.all(10), child: child))),
     );
   }
@@ -34,8 +34,8 @@ class Square extends Shape {
       {super.key,
       super.child,
       super.color,
-      super.height = 0.47,
-      super.width = 0.47,
+      // super.height = 0.47,
+      // super.width = 0.47,
       super.function = nullMethod});
 }
 
@@ -64,8 +64,8 @@ class BigSquare extends Square {
       {super.key,
       super.child,
       super.color,
-      super.height = 0.97,
-      super.width = 0.97,
+      // super.height = 0.97,
+      // super.width = 0.97,
       super.function = nullMethod});
 }
 
@@ -78,8 +78,8 @@ class Circle extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
-        height: 200,
-        width: 200,
+        // height: 200,
+        // width: 200,
         decoration: const BoxDecoration(
             shape: BoxShape.circle, color: Color.fromRGBO(36, 94, 94, 1.0)),
         child: Center(
