@@ -40,7 +40,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
             pinned: true,
             snap: false,
             floating: false,
-            expandedHeight: 200.0,
+            expandedHeight: 100.0,
             bottom: PreferredSize(
               preferredSize: Size.fromHeight(4.0),
               child: Container(
@@ -53,7 +53,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                       children: [
                         Text("Postion",
                             style: TextStyle(
-                                color: Colors.grey[200],
+                                color: Colors.white,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20)),
                         Padding(
@@ -61,7 +61,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                           child: Text(
                             "Name",
                             style: TextStyle(
-                                color: Colors.grey[200],
+                                color: Colors.white,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20),
                           ),
@@ -69,32 +69,13 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
                         Text(
                           "Speed",
                           style: TextStyle(
-                              color: Colors.grey[200],
+                              color: Colors.white,
                               fontWeight: FontWeight.bold,
                               fontSize: 20),
                         )
                       ],
                     ),
                   ),
-                ),
-              ),
-            ),
-            flexibleSpace: FlexibleSpaceBar(
-              background: Container(
-                color: Color.fromRGBO(67, 176, 176, 1),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 100.0),
-                      child: Text(
-                        "Top speeds by rank",
-                        style: TextStyle(
-                            fontSize: 30,
-                            color: Colors.grey[200],
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  ],
                 ),
               ),
             ),
@@ -122,9 +103,9 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
     if (ind == 1) {
       listItem = myLeaderBoardCard(
           pos: ind.toString(),
-          Color: Color(0xFFD0B13E),
+          Color: Color.fromARGB(255, 232, 203, 17),
           name: data!['name'].toString(),
-          padding: 35.0,
+          padding: 35,
           speed: data!['topSpeed'].toStringAsFixed(2) + ' km/h');
     } else if (ind == 2) {
       listItem = myLeaderBoardCard(
@@ -152,7 +133,6 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
     return Stack(
       children: [
         Container(
-          color: Colors.grey[200],
           child: listItem,
         ),
       ],

@@ -85,10 +85,9 @@ class myLeaderBoardCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       margin: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
-      shadowColor: Colors.grey[200],
       color: this.Color,
       child: Container(
-        padding: EdgeInsets.all(this.padding),
+        padding: EdgeInsets.fromLTRB(20, this.padding, 20, this.padding),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

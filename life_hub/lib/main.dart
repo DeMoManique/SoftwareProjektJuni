@@ -103,8 +103,8 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text('Hej ${FirebaseAuth.instance.currentUser?.displayName}'),
         actions: [
           GestureDetector(
-              onTap: () {
-                FirebaseAuth.instance.signOut();
+              onTap: () async {
+                await FirebaseAuth.instance.signOut();
               },
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(0, 0, 15, 0),
@@ -118,15 +118,36 @@ class _HomeScreenState extends State<HomeScreen> {
         mainAxisSpacing: 4,
         crossAxisSpacing: 4,
         children: [
-          StaggeredGridTile.count(crossAxisCellCount: 2, mainAxisCellCount: 2, child: weatherWidget(context, weatherScreen)),
-          StaggeredGridTile.count(crossAxisCellCount: 2, mainAxisCellCount: 4, child: shoppingWidget),
-          StaggeredGridTile.count(crossAxisCellCount: 2, mainAxisCellCount: 2, child: analogClockWidget(context)),
-          StaggeredGridTile.count(crossAxisCellCount: 4, mainAxisCellCount: 2, child: rejseplanWidget(context)),
-          StaggeredGridTile.count(crossAxisCellCount: 2, mainAxisCellCount: 4, child: todoWidget),
-          StaggeredGridTile.count(crossAxisCellCount: 2, mainAxisCellCount: 1, child: clockWidget(context)),
-          StaggeredGridTile.count(crossAxisCellCount: 2, mainAxisCellCount: 3, child: calenderWidget(context)),
-          StaggeredGridTile.count(crossAxisCellCount: 4, mainAxisCellCount: 2, child: widgetRun(context)),
-
+          StaggeredGridTile.count(
+              crossAxisCellCount: 2,
+              mainAxisCellCount: 2,
+              child: weatherWidget(context, weatherScreen)),
+          StaggeredGridTile.count(
+              crossAxisCellCount: 2,
+              mainAxisCellCount: 4,
+              child: shoppingWidget),
+          StaggeredGridTile.count(
+              crossAxisCellCount: 2,
+              mainAxisCellCount: 2,
+              child: analogClockWidget(context)),
+          StaggeredGridTile.count(
+              crossAxisCellCount: 4,
+              mainAxisCellCount: 2,
+              child: rejseplanWidget(context)),
+          StaggeredGridTile.count(
+              crossAxisCellCount: 2, mainAxisCellCount: 4, child: todoWidget),
+          StaggeredGridTile.count(
+              crossAxisCellCount: 2,
+              mainAxisCellCount: 1,
+              child: clockWidget(context)),
+          StaggeredGridTile.count(
+              crossAxisCellCount: 2,
+              mainAxisCellCount: 3,
+              child: calenderWidget(context)),
+          StaggeredGridTile.count(
+              crossAxisCellCount: 4,
+              mainAxisCellCount: 2,
+              child: widgetRun(context)),
         ],
       )
 
