@@ -7,7 +7,7 @@ import 'package:life_hub/Widgets/widgetComponents.dart';
 import 'package:life_hub/Widgets/widgetList.dart';
 import 'package:life_hub/Widgets/widgetWeather.dart';
 import 'package:life_hub/main.dart';
-import 'package:life_hub/services/auth_services.dart';
+import 'package:life_hub/services/googleSignIn.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({Key? key}) : super(key: key);
@@ -173,7 +173,4 @@ class _SignInScreenState extends State<SignInScreen> {
     );
   }
 
-  void signInWithGoogle() {
-    print("I dont do shit");
-  }
 }

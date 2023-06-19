@@ -23,7 +23,7 @@ Widget rejseplanWidget(BuildContext context) {
 
 String pmTo24h(String timepm) {
   String time24h = timepm.substring(0, timepm.length - 2);
-  if (timepm.contains('PM')) {
+  if (timepm.contains('PM') && timepm.split(":")[0] != '12') {
     int timeHours = int.parse(time24h.split(":")[0]);
     timeHours += 12;
     time24h = "$timeHours:${time24h.split(":")[1]}";
