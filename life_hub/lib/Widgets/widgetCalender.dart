@@ -21,7 +21,7 @@ getList() {
           child: ListView.builder(
               itemCount: snapshot.data!.length,
               itemBuilder: ((context, index) {
-                final start = snapshot.data?[index][0].dateTime.toString().substring(11, 16);
+                final start = DateTime.parse(snapshot.data![index][0].dateTime.toString()).add(const Duration(hours: 2)).toString().substring(11, 16);
                 final end = snapshot.data?[index][1];
                 final desc = snapshot.data?[index][2];
                 final location = snapshot.data?[index][3];
@@ -29,6 +29,7 @@ getList() {
 
                 print(title);
                 print(start);
+                print(DateTime.now());
                 return Container(
                   margin: const EdgeInsets.all(5),
                   child: Row(
