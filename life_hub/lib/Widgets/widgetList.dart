@@ -24,30 +24,20 @@ class _ListWidgetState extends State<ListWidget> {
   final String screenName;
   final Color color;
 
-
-
-
   _ListWidgetState(
       {required this.list, required this.screenName, required this.color});
   refresh() {
-    //setState(() {});
+    setState(() {});
   }
-  List<Widget> listItems = [];
 
   @override
-  void initState() {
-    super.initState();
-    listItems = StringListToTextList(list);
-    refresh();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Square(
       context,
       color: color,
       child: ListView(
-        children: listItems,
+        children: StringListToTextList(list()),
       ),
       function: () {
         Navigator.pushNamed(context, '$screenName');
@@ -86,15 +76,9 @@ class _ListWidgetScreenState extends State<ListWidgetScreen> {
   final Function list;
   final ListWidget parentWidget;
   _ListWidgetScreenState(this.name, this.list, this.parentWidget);
-  List<Widget> listItems = StringListToTextListForScreen(list);
 
   refresh() {
-  //  setState(() {});
-  }
-  void initState() {
-    super.initState();
-    listItems = StringListToTextListForScreen(list);
-    refresh();
+    setState(() {});
   }
 
   @override
@@ -114,7 +98,7 @@ class _ListWidgetScreenState extends State<ListWidgetScreen> {
           child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: ListView(
-          children: listItems;
+          children: StringListToTextListForScreen(list(), context, refresh()),
         ),
       )),
       floatingActionButton: FloatingActionButton(
@@ -154,7 +138,7 @@ Widget _buildPopupDialog(
     BuildContext context, Function function, Function list) {
   final TextEditingController controller = TextEditingController();
   return AlertDialog(
-    title: const Text('Add element to shopping list'),
+    title: const Text('Add element to list'),
     content: Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -171,14 +155,14 @@ Widget _buildPopupDialog(
           function();
           Navigator.of(context).pop();
         },
-        child: const Text('add'),
+        child: const Text('Add'),
       ),
       ElevatedButton(
         onPressed: () {
           function();
           Navigator.of(context).pop();
         },
-        child: const Text('Close'),
+        child: const Text('Cancel'),
       ),
     ],
   );
