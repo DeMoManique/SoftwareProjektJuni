@@ -140,20 +140,12 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       ),
                       Column(
-                        children: [VertRectangle(context)],
+                        children: [
+                          analogClockWidget(context),
+                          calenderWidget(context),
+                        ],
                       ),
                     ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      analogClockWidget(context),
-                      calenderWidget(context),
-                    ],
-                  ),
-                  BigSquare(
-                    context,
-                    color: Colors.pink[400],
                   ),
                   Column(children: [
                     widgetRun(context),
