@@ -11,7 +11,7 @@ Widget calenderWidget(BuildContext context) {
 }
 
 getList() {
-  late Future<List> futureEvents = signInWithGoogle();
+  late Future<List> futureEvents = getCalendarEvents();
 
   return FutureBuilder<List>(
     future: futureEvents,
@@ -55,7 +55,7 @@ getList() {
                           style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
                         Text(
-                          location,
+                          "$location",
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                           style: const TextStyle(fontSize: 10),
