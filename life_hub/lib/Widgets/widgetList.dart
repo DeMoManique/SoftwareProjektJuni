@@ -98,19 +98,19 @@ class _ListWidgetScreenState extends State<ListWidgetScreen> {
           child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: ListView(
-          children: StringListToTextListForScreen(list(), context, refresh()),
+          children: StringListToTextListForScreen(list(), context, refresh),
         ),
       )),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          showDialog(
-            context: context,
-            builder: (BuildContext context) =>
-                _buildPopupDialog(context, refresh, list),
-          );
-        },
-        child: Text('data'),
-      ),
+      floatingActionButton: ElevatedButton.icon(
+          onPressed: () {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) =>
+                  _buildPopupDialog(context, refresh, list),
+            );
+          },
+          icon: Icon(Icons.add),
+          label: Text('add')),
     );
   }
 
