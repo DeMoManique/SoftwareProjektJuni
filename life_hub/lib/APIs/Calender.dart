@@ -25,10 +25,7 @@ Future<List> getCalendarEvents() async{
 
   GoogleSignInAccount? googleSignIn = await _googleSignIn.signIn();
 
-
-
   final api = googleCalendar.CalendarApi((await _googleSignIn.authenticatedClient()) as http.Client);
-  print("HEj");
   List eventsList = [];
 
   googleCalendar.Events eventsFromAPI = await api.events.list('primary', timeMin: DateTime.now());
@@ -44,71 +41,13 @@ Future<List> getCalendarEvents() async{
   return eventsList;
 }
 
-//   Future<List> getCalendarEvents() async {
-//       final GoogleSignInAccount? googleUser = _googleSignIn.currentUser;
-      
-//       final GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+Future<List> getLocation() async{
+  List list = await getCalendarEvents();
+  List locationList = [];
 
-//       AuthCredential credentials = GoogleAuthProvider.credential(
-//         idToken: googleAuth?.idToken,
-//         accessToken: googleAuth?.accessToken
-//       );
+  list.forEach((element) { 
+    locationList.add([element[0], element[3]]);
+  });
 
-//       print(googleAuth?.idToken);
-//       print(googleAuth?.accessToken);
-
-//       final UserCredential user = await FirebaseAuth.instance.signInWithCredential(credentials);
-
-//       print(user.user?.displayName);
-
-//       Future<Client> authClient = _googleSignIn.authenticatedClient() as Future<Client>;
-
-     
-
-
-//     //final calendar = CalendarApi(authClient);
-
-
-//     //assert(getAuthClient() != null, "Client non existent");
-    
-//     final api = googleCalendar.CalendarApi(await authClient);
-//     //assert(api != null, "Api non existent");
-    
-//     //assert(api.events.list('primary', timeMin: DateTime.now()) != null , "Faulty");
-
-//     List eventsList = [];
-   
-//    googleCalendar.Events events = await api.events.list('primary', timeMin: DateTime.now());
-//     events.items!.forEach((event) {
-//       //print(event.summary);
-//       if(event.location == null){
-//         eventsList.add([event.start, event.end, event.description, "No Location", event.summary]);
-//       } else if (event.location != null){
-//         eventsList.add([event.start, event.end, event.description, event.location, event.summary]);
-//       }
-//     });
-
-//     List getLocation(){
-//       List locationList = [];
-//       events.items!.forEach((event) { 
-//         if(event.location == null){
-//           locationList.add("No Location");
-//       } else if (event.location != null){
-//           locationList.add(event.location);
-//       }
-//       });
-//       return locationList;
-//     }
-    
-//     return eventsList;
-//   }
-
-
-
-
-// // void main() async{
-// //   WidgetsFlutterBinding.ensureInitialized();
-// //   await Firebase.initializeApp();
-// //   LoginPage lp = LoginPage();
-// //   lp.signInWithGoogle();
-// // }
+  return locationList;
+}

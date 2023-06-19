@@ -16,7 +16,7 @@ getList() {
   return FutureBuilder<List>(
     future: futureEvents,
     builder: (context, snapshot) {
-      if (snapshot.hasData) {
+      if (snapshot.hasData && snapshot.data!.isNotEmpty) {
         return Center(
           child: ListView.builder(
               itemCount: snapshot.data!.length,
@@ -26,10 +26,6 @@ getList() {
                 final desc = snapshot.data?[index][2];
                 final location = snapshot.data?[index][3];
                 final title = snapshot.data?[index][4];
-
-                print(title);
-                print(start);
-                print(DateTime.now());
                 return Container(
                   margin: const EdgeInsets.all(5),
                   child: Row(
@@ -66,9 +62,9 @@ getList() {
                 );
               })),
         );
-      } else if (snapshot.hasError) {
-        print('failure');
-        return Text('${snapshot.error}');
+      } else if (snapshot.hasError || snapshot.data!.isEmpty) {
+        print('${snapshot.error}');
+        return const Text("Sorry! Something went wrong. :( Try Again!");
       }
 
       return const CircularProgressIndicator();
