@@ -98,45 +98,35 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
   Widget buildLeaderboard(BuildContext context, int index) {
     int placement = index + 1;
 
-    Widget listItem;
-
     if (placement == 1) {
-      listItem = myLeaderBoardCard(
+      return myLeaderBoardCard(
           pos: placement.toString(),
           Color: Color.fromARGB(255, 232, 203, 17),
           name: data!['name'].toString(),
           padding: 35,
           speed: data!['topSpeed'].toStringAsFixed(2) + ' km/h');
     } else if (placement == 2) {
-      listItem = myLeaderBoardCard(
+      return myLeaderBoardCard(
           pos: placement.toString(),
           Color: const Color.fromARGB(255, 190, 190, 190),
           name: data!['name'].toString(),
           padding: 28.0,
           speed: data!['topSpeed'].toStringAsFixed(2) + ' km/h');
     } else if (placement == 3) {
-      listItem = myLeaderBoardCard(
+      return myLeaderBoardCard(
           pos: placement.toString(),
           Color: Color(0xFFA45735),
           name: data!['name'].toString(),
           padding: 20.0,
           speed: data!['topSpeed'].toStringAsFixed(2) + ' km/h');
     } else {
-      listItem = myLeaderBoardCard(
+      return myLeaderBoardCard(
           pos: placement.toString(),
           Color: Colors.white,
           name: data!['name'].toString(),
           padding: 15.0,
           speed: data!['topSpeed'].toStringAsFixed(2) + ' km/h');
     }
-
-    return Stack(
-      children: [
-        Container(
-          child: listItem,
-        ),
-      ],
-    );
   }
 
   Widget loadLeaderBoardData(String documentID, int index) {
