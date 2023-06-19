@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:life_hub/Widgets/widgetSetup.dart';
 import 'package:life_hub/Widgets/widgetShapes.dart';
 import 'package:life_hub/APIs/Calender.dart';
+import 'package:googleapis/calendar/v3.dart' as cal;
+
 
 @override
 Widget calenderWidget(BuildContext context) {
@@ -19,13 +21,14 @@ getList() {
           child: ListView.builder(
               itemCount: snapshot.data!.length,
               itemBuilder: ((context, index) {
-                final start = snapshot.data?[index][0];
+                final start = snapshot.data?[index][0].dateTime.toString().substring(11, 16);
                 final end = snapshot.data?[index][1];
                 final desc = snapshot.data?[index][2];
                 final location = snapshot.data?[index][3];
                 final title = snapshot.data?[index][4];
 
                 print(title);
+                print(start);
                 return Container(
                   margin: const EdgeInsets.all(5),
                   child: Row(
@@ -45,7 +48,7 @@ getList() {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          title,
+                          "$title, $start",
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                           style: const TextStyle(fontWeight: FontWeight.bold),

@@ -19,7 +19,7 @@ import 'package:extension_google_sign_in_as_googleapis_auth/extension_google_sig
     GoogleSignIn? googleSignIn = GoogleSignIn(
       scopes: [CalendarApi.calendarEventsScope], 
     );
-
+  
     GoogleSignInAccount? googleUser = await googleSignIn.signIn();
 
     GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
@@ -51,9 +51,22 @@ import 'package:extension_google_sign_in_as_googleapis_auth/extension_google_sig
         eventsList.add([event.start, event.end, event.description, event.location, event.summary]);
       }
     });
+
+    List getLocation(){
+      List locationList = [];
+      events.items!.forEach((event) { 
+        if(event.location == null){
+          locationList.add("No Location");
+      } else if (event.location != null){
+          locationList.add(event.location);
+      }
+      });
+      return locationList;
+    }
     
     return eventsList;
   }
+
 
 
 
