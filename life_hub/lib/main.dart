@@ -1,6 +1,8 @@
 import 'dart:async';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:life_hub/Pages/leaderBoardScreen.dart';
+import 'package:life_hub/Pages/signinScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:life_hub/Widgets/widgetAnalogClock.dart';
 import 'package:life_hub/Widgets/widgetCalender.dart';
@@ -8,15 +10,14 @@ import 'package:life_hub/Widgets/widgetAd.dart';
 import 'package:life_hub/Widgets/widgetSetup.dart';
 import 'package:life_hub/Widgets/widgetShapes.dart';
 import 'package:life_hub/Widgets/widgetRejseplan.dart';
-import 'package:life_hub/Widgets/widgetShopList.dart';
-import 'package:life_hub/Widgets/widgetTODO.dart';
+import 'package:life_hub/Widgets/widgetList.dart';
 import 'package:life_hub/Widgets/widgetWeather.dart';
-
+import 'package:life_hub/Widgets/widgetRun.dart';
 import 'Widgets/widgetClock.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Firebase.initializeApp();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -26,13 +27,40 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    HomeScreen homeScreen = HomeScreen();
+    ShoppingWidget shoppingWidget = ShoppingWidget(
+      color: Colors.red,
+    );
+    ShoppingListScreen shopScreen =
+        ShoppingListScreen(parentWidget: shoppingWidget);
+    TODOWidget todoWidget = TODOWidget(color: Colors.blue);
+    TodoListScreen todoScreen = TodoListScreen(parentWidget: todoWidget);
+    WeatherScreen weatherScreen = WeatherScreen();
+
+    HomeScreen homeScreen = HomeScreen(
+      shoppingWidget: shoppingWidget,
+      todoWidget: todoWidget,
+      weatherScreen: weatherScreen,
+    );
+
     return MaterialApp(
-      initialRoute: '/',
+      debugShowCheckedModeBanner: false,
+      home: StreamBuilder<User?>(
+          stream: FirebaseAuth.instance.authStateChanges(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return homeScreen;
+            } else {
+              return const SignInScreen();
+            }
+          }),
       routes: {
         //Add screens here
-        '/': (context) => homeScreen,
-        '/ShoppingScreen': (context) => ShoppingScreen(homeScreen: homeScreen),
+        '/homeScreen': (context) => homeScreen,
+        '/ShoppingScreen': (context) => shopScreen,
+        '/TODOScreen': (context) => todoScreen,
+        '/WeatherScreen': (context) => weatherScreen,
+        '/speedScreen': (context) => const SpeedScreen(),
+        '/leaderboardScreen': (context) => const LeaderboardScreen(),
       },
     );
   }
@@ -43,24 +71,45 @@ void test() {
 }
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen({super.key});
-  final ShopWidget shopWidget = ShopWidget();
+  final ShoppingWidget shoppingWidget;
+  final TODOWidget todoWidget;
+  final WeatherScreen weatherScreen;
+  HomeScreen(
+      {super.key,
+      required this.shoppingWidget,
+      required this.todoWidget,
+      required this.weatherScreen});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState(shopWidget);
+  State<HomeScreen> createState() =>
+      _HomeScreenState(shoppingWidget, todoWidget, weatherScreen);
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  ShopWidget shopWidget;
-  _HomeScreenState(this.shopWidget);
+  final ShoppingWidget shoppingWidget;
+  final TODOWidget todoWidget;
+  final WeatherScreen weatherScreen;
 
+  _HomeScreenState(this.shoppingWidget, this.todoWidget, this.weatherScreen);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.blueGrey,
+        backgroundColor: Color.fromRGBO(67, 176, 176, 1),
         appBar: AppBar(
-          backgroundColor: Colors.blue[200],
-          title: Text('Hej ${getName()}'),
+          automaticallyImplyLeading: false,
+          forceMaterialTransparency: true,
+          backgroundColor: Color.fromRGBO(48, 125, 125, 1),
+          title: Text('Hej ${FirebaseAuth.instance.currentUser?.displayName}'),
+          actions: [
+            GestureDetector(
+                onTap: () {
+                  FirebaseAuth.instance.signOut();
+                },
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 0, 15, 0),
+                  child: Icon(Icons.logout),
+                ))
+          ],
         ),
         body: LayoutBuilder(builder:
             (BuildContext context, BoxConstraints viewportConstraints) {
@@ -72,7 +121,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [weatherWidget(context), shopWidget],
+                    children: [
+                      weatherWidget(context, weatherScreen),
+                      shoppingWidget
+                    ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -84,25 +136,20 @@ class _HomeScreenState extends State<HomeScreen> {
                       Column(
                         children: [
                           clockWidget(context),
-                          AdWidget(context),
+                          todoWidget,
                         ],
                       ),
                       Column(
-                        children: [TODOWidget(context)],
+                        children: [
+                          analogClockWidget(context),
+                          calenderWidget(context),
+                        ],
                       ),
                     ],
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      analogClockWidget(context),
-                      calenderWidget(context),
-                    ],
-                  ),
-                  BigSquare(
-                    context,
-                    color: Colors.pink[400],
-                  )
+                  Column(children: [
+                    widgetRun(context),
+                  ]),
                 ],
               ),
             ),

@@ -1,5 +1,43 @@
 {
   "project_info": {
+    "project_number": "873800981145",
+    "project_id": "lifehub-a70e6",
+    "storage_bucket": "lifehub-a70e6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:873800981145:android:87e7cc496cd7cd22d83608",
+        "android_client_info": {
+          "package_name": "com.example.life_hub"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "873800981145-h9oije2i8j2i788mrb7h06cp2slddpen.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDoosAfYQZtfTFLxkoqa5aJG_YjD3ECloY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "873800981145-h9oije2i8j2i788mrb7h06cp2slddpen.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}{
+  "project_info": {
     "project_number": "798383791944",
     "project_id": "softwareprojectjuni",
     "storage_bucket": "softwareprojectjuni.appspot.com"

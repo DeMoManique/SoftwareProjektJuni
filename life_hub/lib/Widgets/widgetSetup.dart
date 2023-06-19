@@ -20,3 +20,10 @@ List<String> getShoppingList() {
 }
 
 List<String> tempShop = [];
+
+List<String> getTODOList() {
+  //TODO få indkøbsliste fra database?
+  return tempTODO;
+}
+
+List<String> tempTODO = [];
