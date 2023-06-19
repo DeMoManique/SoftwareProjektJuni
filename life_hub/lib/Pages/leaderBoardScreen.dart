@@ -30,7 +30,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
         .limit(50)
         .get()
         .then((value) => value.docs.forEach((element) {
-              // saving the refId in the speeds list
+              // saving the refIds in the speeds list
               speeds.add(element.reference.id);
             }));
   }
@@ -45,36 +45,34 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
           preferredSize: Size.fromHeight(20.0),
           child: Container(
             height: 50,
-            child: Container(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("Postion",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20)),
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(0, 0, 25, 0),
-                      child: Text(
-                        "Name",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20),
-                      ),
-                    ),
-                    Text(
-                      "Speed",
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("Postion",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20)),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(0, 0, 25, 0),
+                    child: Text(
+                      "Name",
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                           fontSize: 20),
-                    )
-                  ],
-                ),
+                    ),
+                  ),
+                  Text(
+                    "Speed",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20),
+                  )
+                ],
               ),
             ),
           ),
@@ -106,7 +104,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
     if (placement == 1) {
       return myLeaderBoardCard(
           pos: placement.toString(),
-          Color: Color.fromARGB(255, 232, 203, 17),
+          Color: Color.fromARGB(255, 220, 194, 20),
           name: data!['name'].toString(),
           padding: 35,
           speed: data!['topSpeed'].toStringAsFixed(2) + ' km/h');
@@ -120,7 +118,7 @@ class _LeaderboardScreenState extends State<LeaderboardScreen> {
     } else if (placement == 3) {
       return myLeaderBoardCard(
           pos: placement.toString(),
-          Color: Color(0xFFA45735),
+          Color: Color.fromARGB(255, 182, 103, 70),
           name: data!['name'].toString(),
           padding: 20.0,
           speed: data!['topSpeed'].toStringAsFixed(2) + ' km/h');
