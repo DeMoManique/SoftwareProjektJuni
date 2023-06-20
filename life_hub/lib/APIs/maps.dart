@@ -9,11 +9,15 @@ Future<Route> fetchRoutes() async {
       desiredAccuracy: LocationAccuracy.high);
   String location = '${position.latitude}, ${position.longitude}'; // location
   String avoid = "";
-  List locations = await getLocation();
   String key = 'AIzaSyBBqzjnUpxLRN4jHKKyDxQ3oXPTmWqlEC8'; // api key fra disc
-  String des = await locations[0][1];
   String mode = 'transit';
-  int arrival = DateTime.parse(locations[0][0].dateTime.toString()).add(const Duration(hours: 2)).microsecondsSinceEpoch;
+  List locations = await getLocation();
+  String des = "55.783704, 12.518376";
+  int arrival = 0;
+  if(locations.isNotEmpty && locations[0][1] != "No Location"){
+    des = await locations[0][1];
+    arrival = DateTime.parse(locations[0][0].dateTime.toString()).add(const Duration(hours: 2)).microsecondsSinceEpoch;
+  }
 
   print("https://maps.googleapis.com/maps/api/directions/json?avoid=$avoid&destination=$des&mode=$mode&origin=$location&departure_time=$arrival&key=$key");
 

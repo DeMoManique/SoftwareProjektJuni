@@ -6,16 +6,16 @@ import 'package:googleapis/calendar/v3.dart' as cal;
 
 
 @override
-Widget calenderWidget(BuildContext context) {
+Widget calenderWidget(BuildContext context){
   return Square(context, child: getList());
 }
 
-getList() {
-  late Future<List> futureEvents = getCalendarEvents();
-
+getList(){
+ Future<List> futureEvents = getCalendarEvents();
   return FutureBuilder<List>(
     future: futureEvents,
     builder: (context, snapshot) {
+      print(snapshot.hasData);
       if (snapshot.hasData && snapshot.data!.isNotEmpty) {
         return Center(
           child: ListView.builder(
@@ -62,8 +62,9 @@ getList() {
                 );
               })),
         );
-      } else if (snapshot.hasError || snapshot.data!.isEmpty) {
-        print('${snapshot.error}');
+      } else if(snapshot.data == null || snapshot.data!.isEmpty){
+        return const Text("You dont have any events on your calendar :)");
+      } else if (snapshot.hasError) {
         return const Text("Sorry! Something went wrong. :( Try Again!");
       }
 

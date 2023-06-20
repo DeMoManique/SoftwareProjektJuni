@@ -85,8 +85,7 @@ getRoutes() {
         String arrivalTime = pmTo24h(snapshot.data!.arrivalTime);
         String travelTime = snapshot.data!.travelTime;
         List<String> origin = locationName(snapshot.data!.origin.split(","));
-        List<String> destination =
-            locationName(snapshot.data!.destination.split(","));
+        List<String> destination = locationName(snapshot.data!.destination.split(","));
 
         List steps = snapshot.data!.lines;
 
@@ -211,7 +210,7 @@ getRoutes() {
         //   Text(snapshot.data!.destination.split(",")[0])
         // ]),
       } else if (snapshot.hasError) {
-        print('failure');
+        print('${snapshot.error}');
         return Text('${snapshot.error}');
       }
 

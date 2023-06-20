@@ -67,7 +67,7 @@ getWeather() {
           ),
         );
       } else if (snapshot.hasError) {
-        print('failure');
+        print('Fejl i Weather');
         return Text('${snapshot.error}');
       }
 
