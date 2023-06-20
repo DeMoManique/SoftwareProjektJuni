@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:life_hub/APIs/maps.dart' as route;
 import 'package:life_hub/Widgets/widgetSetup.dart';
 import 'package:life_hub/APIs/Calender.dart';
-import 'package:life_hub/APIs/Calender.dart';
 
 @override
 Widget rejseplanWidget(BuildContext context) {

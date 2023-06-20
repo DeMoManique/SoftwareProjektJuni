@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:life_hub/Widgets/widgetSetup.dart';
 import 'package:life_hub/Widgets/widgetShapes.dart';
 import 'package:life_hub/APIs/Calender.dart';
-import 'package:googleapis/calendar/v3.dart' as cal;
 
 
 @override
@@ -15,7 +14,6 @@ getList(){
   return FutureBuilder<List>(
     future: futureEvents,
     builder: (context, snapshot) {
-      print(snapshot.hasData);
       if (snapshot.hasData && snapshot.data!.isNotEmpty) {
         return Center(
           child: ListView.builder(

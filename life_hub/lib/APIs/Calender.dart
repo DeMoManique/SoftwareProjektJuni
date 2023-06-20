@@ -6,13 +6,8 @@ import 'package:http/http.dart' as http;
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:googleapis/calendar/v3.dart' as googleCalendar;
-import 'package:googleapis/servicemanagement/v1.dart';
-import 'package:googleapis_auth/auth_io.dart' as auth;
 import 'package:googleapis_auth/googleapis_auth.dart';
-import 'package:http/io_client.dart';
-import 'package:http/http.dart';
 import 'package:extension_google_sign_in_as_googleapis_auth/extension_google_sign_in_as_googleapis_auth.dart';
-import '../services/googleSignIn.dart';
 
 
 final GoogleSignIn _googleSignIn = GoogleSignIn(
