@@ -1,16 +1,8 @@
-# life_hub
+# LifeHub
 
-A new Flutter project.
+Lifehub projektet af gruppe 11. 
 
-## Getting Started
+## OBS
+Projektet gør brug af Google Calendar API'en, hvilket kræver nogle forskellige nøgler osv. 
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Da vi ikke har "published" appen kræver det at man har den samme SHA1-kode i sin keystore-fil. Idet projektet skal afleveres som kildekode, kan vi ikke bygge appen, med en bestemt SHA1-fingerprint, derfor vil denne funktion ikke virke hos dig. 
